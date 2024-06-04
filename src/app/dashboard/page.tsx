@@ -1,19 +1,15 @@
+import { SignIn } from "@clerk/nextjs";
+
 import { SignInButton } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
 import Link from "next/link";
 import { Button } from "~/components/ui/button";
 import {LogIn} from 'lucide-react'
-import FileUpload, { BaseDemo } from "~/components/fileUpload";
 
-
-// import {Uploader} from "~/components/fileUpload";
-
-export default async function HomePage() {
-  const {userId} = await auth();
-  const isAuth = !!userId
-  return (
-    <main className="">
-      <div className="bg-gray-50 min-h-screen flex items-center justify-center px-16">
+export default async function Page() {
+    const {userId} = await auth();
+    const isAuth = !!userId
+  return (<div className="bg-gray-50 min-h-screen flex items-center justify-center px-16">
   <div className="absolute w-full max-w-lg">
     <div className="absolute top-0 -left-3 w-72 h-72 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
     <div className="absolute top-0 -right-4 w-72 h-72 bg-yellow-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-6000"></div>
@@ -26,7 +22,11 @@ export default async function HomePage() {
         <p>Upload your pdf or past your abstract to generate a reads optimized title</p>
         <div className="flex mt-4 whitespace-nowrap">
           {isAuth ? <div><Button>go to chats</Button>
-          <FileUpload/>
+          <div className="mt-4 p-2 bg-white rounded-full">
+          
+          {/* <BaseDemo></BaseDemo> */}
+
+          </div>
           </div>: <div><Link href="/sign-in">
           <Button>Sign in <LogIn className="w-4 h-4 ml-2"></LogIn></Button></Link>
           </div>
@@ -38,7 +38,5 @@ export default async function HomePage() {
       </div>
     </div>
   </div>
-</div>
-    </main>
-  );
+</div>)
 }
