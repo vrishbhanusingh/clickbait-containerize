@@ -5,13 +5,39 @@ import { Input } from './ui/input';
 import { Button } from "./ui/button";
 import {Send} from 'lucide-react';
 import MessageList from './MessageList';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+import { Message } from 'ai';
 type Props = { chatid: number };
 
 const ChatComponent = ({ chatid }: Props) => {
+    const {data} = useQuery({
+        queryKey: ["chat", chatid],
+        queryFn: async () => {
+            const response = await axios.post<Message[]>('/api/get-messages', {chatid})
+            return response.data
+        }
+    })
+    const {input, handleInputChange, handleSubmit, messages, isLoading} = useChat({
+        api: "/api/chat",
+        body: {
+            chatid
+        },
+        initialMessages: data ?? []
+    }
+    );
 
-    const {input, handleInputChange, handleSubmit, messages, isLoading} = useChat();
     
-
+    
+    React.useEffect(() => {
+        const messageContainer = document.getElementById("message-container");
+        if (messageContainer) {
+          messageContainer.scrollTo({
+            top: messageContainer.scrollHeight,
+            behavior: "smooth",
+          });
+        }
+      }, [messages]);
     return  (
         <div
           className="relative max-h-full overflow-scroll scrollbar-hide"
@@ -32,6 +58,7 @@ const ChatComponent = ({ chatid }: Props) => {
             onSubmit={handleSubmit}
             className="sticky bottom-0 inset-x-0 mt-100 bg-gray-50"
           >
+            
             <div className="flex">
               <Input
                 value={input}
@@ -49,5 +76,7 @@ const ChatComponent = ({ chatid }: Props) => {
         </div>
       );
 }
+
+
 
 export default ChatComponent;

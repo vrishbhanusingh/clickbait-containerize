@@ -1,3 +1,4 @@
+
 import { PutObjectCommandOutput, S3 } from "@aws-sdk/client-s3";
 
 export async function uploadToS3(
@@ -6,11 +7,12 @@ export async function uploadToS3(
     return new Promise((resolve, reject) => {
       try {
 
-        const region = process.env.NEXT_PUBLIC_S3_REGION!;
-        const accessKeyId = process.env.NEXT_PUBLIC_S3_ACCESS_KEY_ID!;
-        const secretAccessKey = process.env.NEXT_PUBLIC_S3_SECRET_ACCESS_KEY!;
-        const bucketName = process.env.NEXT_PUBLIC_S3_BUCKET_NAME!;
-    
+        // const region = process.env.NEXT_PUBLIC_S3_REGION!;
+        // const accessKeyId = process.env.NEXT_PUBLIC_S3_ACCESS_KEY_ID!;
+        // const secretAccessKey = process.env.NEXT_PUBLIC_S3_SECRET_ACCESS_KEY!;
+        // const bucketName = process.env.NEXT_PUBLIC_S3_BUCKET_NAME!;
+        // console.log(process.env)
+        // console.log('clerk key',process.env.CLERK_SECRET_KEY)
         // console.log('S3 Region:', region);
         // console.log('S3 Access Key ID:', accessKeyId);
         // console.log('S3 Secret Access Key:', secretAccessKey ? '******' : 'Not Set');

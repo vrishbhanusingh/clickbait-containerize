@@ -1,4 +1,3 @@
-import AWS from 'aws-sdk';
 import { GetObjectCommand, S3 } from "@aws-sdk/client-s3";
 import fs from "fs";
 import { promisify } from 'util';

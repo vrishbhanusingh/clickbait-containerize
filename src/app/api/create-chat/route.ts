@@ -17,15 +17,16 @@ export async function POST(req: Request) {
     }
     try {
         const body = await req.json();
-        const { file_key, file_name } = body;
+        const { file_key, file_name , abstract } = body;
 
         // Your processing logic here
-        console.log('Received data:', { file_key, file_name });
+        console.log('Received data:', { file_key, file_name, abstract });
         const pages = await loadS3IntoPinecone(file_key)
         const chat_id = await db.insert(chats).values({
             fileKey: file_key,
             pdfName: file_name,
             pdfUrl: getS3Url(file_key),
+            abstract: abstract,
             userId,
         })
         .returning({

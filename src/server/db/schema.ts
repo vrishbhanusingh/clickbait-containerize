@@ -53,6 +53,7 @@ export const chats = createTable(
     updatedAt: timestamp("updatedAt", { withTimezone: true }),
     userId : varchar("user_id", {length:256}).notNull(),
     fileKey: varchar('file_key', {length:1024}).notNull(),
+    abstract: varchar('abstract'),
   }
 )
 
@@ -63,6 +64,21 @@ export const messages = createTable(
     chatId: integer("chat_id",).references(()=> chats.id).notNull(),
     content : varchar("content", {length: 1024} ).notNull(),
     role:userSystemEnum('role').notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .default(sql`CURRENT_TIMESTAMP`)
+      .notNull(),
+    updatedAt: timestamp("updatedAt", { withTimezone: true }),}
+
+)
+
+export const generatedTitles = createTable(
+  'generatedTitles',
+  {
+    id: serial("id").primaryKey(),
+    chatId: integer("chat_id",).references(()=> chats.id).notNull(),
+    generatedTitle : varchar("generated_title" ).notNull(),
+    abstract: varchar('abstract'),
+    // role:userSystemEnum('role').notNull(),
     createdAt: timestamp("created_at", { withTimezone: true })
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),

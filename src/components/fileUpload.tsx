@@ -1,28 +1,38 @@
 'use client';
 
 import { useMutation } from '@tanstack/react-query';
-import { Axis3DIcon, Inbox,Loader2  } from 'lucide-react';
+import { Inbox,Loader2  } from 'lucide-react';
 import React from 'react';
 import { useDropzone } from 'react-dropzone'
 import { uploadToS3 } from '~/lib/s3';
 import { toast } from "react-hot-toast";
 import axios from 'axios';
-import {useRouter} from 'next/navigation'
+import {useRouter} from 'next/navigation';
+import { useState } from "react";
 const FileUpload = () => {
   const router = useRouter()
   const [uploading, setUploading] = React.useState(false);
-    const { mutate, isPending } = useMutation({
+  const [abstractText, setAbstractText] = useState("");
+  const [acceptedFile, setAcceptedFile] = useState(null);
+  const [fileKey, setFileKey] = useState("");
+  const [fileName, setFileName] = useState("");
+
+
+  const { mutate, isPending } = useMutation({
         mutationFn: async ({
           file_key,
           file_name,
+          abstract,
         }: {
           file_key: string;
           file_name: string;
+          abstract: string;
         }) => {
           try {
             const response = await axios.post("/api/create-chat", {
               file_key,
               file_name,
+              abstract,
             });
             return response.data;
           } catch (error) {
@@ -47,26 +57,27 @@ const FileUpload = () => {
             try {
                 setUploading(true);
                 const data = await uploadToS3(file);
-
+                setAcceptedFile(file);
+                setFileKey(data.file_key);
+                setFileName(data.file_name);
                 console.log('S3 upload data:', data);
                 if (!data?.file_key || !data.file_name) {
                     toast.error("Something went wrong");
                     return;
                 }
 
-                mutate(data, {
-                    onSuccess: ({chat_id}) => {
-                        
-                        toast.success("Chat created!");
-                        console.log(`chat id is: ${chat_id}`);
-                        router.push(`/chat/${chat_id}`);
+                // mutate(data, {
+                //     onSuccess: ({chat_id}) => {
+                //         toast.success("Chat created!");
+                //         console.log(`chat id is: ${chat_id}`);
+                //         // router.push(`/chat/${chat_id}`);
 
-                    },
-                    onError: (err) => {
-                        toast.error("Error creating chat");
-                        console.error('Mutation error', err);
-                    }
-                });
+                //     },
+                //     onError: (err) => {
+                //         toast.error("Error creating chat");
+                //         console.error('Mutation error', err);
+                //     }
+                // });
             } catch (error) {
                 console.error('Error during file upload', error);
                 toast.error("Error uploading file");
@@ -75,6 +86,33 @@ const FileUpload = () => {
             }
         }
     });
+
+    const handleAbstractChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setAbstractText(event.target.value);
+    };
+    const handleSubmit = async () => {
+      // event.preventDefault();
+      if (!fileKey || !fileName) {
+        toast.error("File not uploaded yet");
+        return;
+      }
+      mutate({
+        file_key: fileKey,
+        file_name: fileName,
+        abstract: abstractText,
+      }, {
+        onSuccess: ({ chat_id }) => {
+          toast.success("Chat created!");
+          console.log(`chat id is: ${chat_id}`);
+          router.push(`/chat/${chat_id}`);
+        },
+        onError: (err) => {
+          toast.error("Error creating chat");
+          console.error('Mutation error', err);
+        }
+      });
+    };
+    
 
     return (
 <div className='p-4 bg-white rounded-xl w-96'> {/* Increase padding for overall size */}
@@ -98,6 +136,28 @@ const FileUpload = () => {
         }
 
     </div>
+
+      <div className="my-4">
+          <label htmlFor="abstract" className="block text-sm font-medium text-gray-700">Abstract:</label>
+          <textarea
+            id="abstract"
+            value={abstractText}
+            onChange={handleAbstractChange}
+            rows={4}
+            className="shadow-sm mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+          />
+      </div>
+      <div className="flex justify-center">
+          <button 
+            type="submit" 
+            onClick={handleSubmit}
+            className="mt-2 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+          
+          >
+            Submit
+          </button>
+      </div>
+
 </div>
     );
 };

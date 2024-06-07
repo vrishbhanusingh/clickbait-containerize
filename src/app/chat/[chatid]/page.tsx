@@ -7,6 +7,7 @@ import { eq } from "drizzle-orm";
 import ChatSideBar from '~/components/ChatSideBar';
 import PDFViewer from '~/components/ui/PDFViewer';
 import ChatComponent from '~/components/ChatComponent';
+import GenratedTitle from '~/components/titleGen';
 type Props = {
     params: {
         chatid:string
@@ -40,9 +41,12 @@ const ChatPage = async ({ params: { chatid } }: Props) => {
     <div className="flex-[1] max-w-xs h-screen rounded-3xl scrollbar-hide"><ChatSideBar chats={_chats} chatId={parseInt(chatid)} isPro={isPro} /></div>
     
     <div className="max-h-screen p-4 oveflow-scroll flex-[5] scrollbar-hide rounded-xl">
+    <GenratedTitle chatid = {parseInt(chatid)}/>
     <PDFViewer pdf_url={currentChat?.pdfUrl ?? " "} />
+    
     </div>
     <div className="flex-[3] border-l-4 border-l-slate-200 scrollbar-hide"><ChatComponent chatid = {parseInt(chatid)}/></div>
+    
     </div>
     </div>
 

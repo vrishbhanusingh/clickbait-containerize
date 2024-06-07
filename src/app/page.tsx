@@ -3,7 +3,8 @@ import { auth } from "@clerk/nextjs/server";
 import Link from "next/link";
 import { Button } from "~/components/ui/button";
 import {LogIn} from 'lucide-react'
-import FileUpload, { BaseDemo } from "~/components/fileUpload";
+import FileUpload from "~/components/fileUpload";
+
 
 
 // import {Uploader} from "~/components/fileUpload";
