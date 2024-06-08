@@ -57,6 +57,22 @@ export const chats = createTable(
   }
 )
 
+export const papers = createTable(
+  'papers',
+  {
+    id: serial("id").primaryKey(),
+    pdfName: varchar("pdf_name", { length: 256 }).notNull(),
+    pdfUrl : varchar("pdf_url", {length: 1024} ).notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .default(sql`CURRENT_TIMESTAMP`)
+      .notNull(),
+    updatedAt: timestamp("updatedAt", { withTimezone: true }),
+    userId : varchar("user_id", {length:256}).notNull(),
+    fileKey: varchar('file_key', {length:1024}).notNull(),
+    abstract: varchar('abstract'),
+  }
+)
+
 export const messages = createTable(
   'messages',
   {
@@ -86,3 +102,4 @@ export const generatedTitles = createTable(
 
 )
 export type DrizzleChat = typeof chats.$inferSelect;
+export type DrizzlePaper = typeof papers.$inferSelect;

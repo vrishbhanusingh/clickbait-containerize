@@ -1,6 +1,6 @@
 'use client'
 import React from 'react';
-import {useChat} from "ai/react"
+import { useChat } from "ai/react"
 import { Input } from './ui/input';
 import { Button } from "./ui/button";
 import {Send} from 'lucide-react';

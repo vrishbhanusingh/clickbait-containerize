@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Button } from "~/components/ui/button";
 import {LogIn} from 'lucide-react'
 import FileUpload from "~/components/fileUpload";
+import GoToDashButton from "~/components/ui/GoToDashButton";
 
 
 
@@ -24,9 +25,10 @@ export default async function HomePage() {
         <h1 className="text-5xl font-semibold whitespace-nowrap" >
           Generate read optimized titles
         </h1>
-        <p>Upload your pdf or past your abstract to generate a reads optimized title</p>
+        <p>Upload your pdf or paste your abstract to generate a reads optimized title</p>
         <div className="flex mt-4 whitespace-nowrap">
-          {isAuth ? <div><Button>go to chats</Button>
+          {isAuth ? 
+          <div><GoToDashButton/>
           <FileUpload/>
           </div>: <div><Link href="/sign-in">
           <Button>Sign in <LogIn className="w-4 h-4 ml-2"></LogIn></Button></Link>

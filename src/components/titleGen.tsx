@@ -29,7 +29,7 @@ const GenratedTitle = ({ chatid }: Props) => {
     response = response?.replace("::TITLESTART::", "").replace("::TITLEEND::", "").trim();
     console.log(response);
     return  (
-      <div className="bg-yellow-600 text-white font-bold p-4 rounded-lg shadow-lg mb-4 bg-opacity-70">
+      <div className="bg-yellow-600 text-white font-bold p-4 rounded-lg shadow-lg mb-4">
             <h2 className="text-2xl mb-2">Generated Title:</h2>
             <h2 className='text-black text-2xl'>{response}</h2>
             <Button className="mt-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full inline-flex items-center">

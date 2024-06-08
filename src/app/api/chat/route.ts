@@ -114,6 +114,7 @@ export const maxDuration = 30;
 export async function POST(req: Request) {
   try {
     const { messages, chatid } = await req.json();
+
     const _chats = await db.select().from(chats).where(eq(chats.id, chatid));
 
     if (_chats.length !== 1) {
@@ -124,7 +125,7 @@ export async function POST(req: Request) {
     const fileKey = _chats[0].fileKey;
     const lastMessage = messages[messages.length - 1];
     const context = await getContext(lastMessage.content, fileKey);
-
+    
     const systemPrompt = `AI assistant is a brand new, powerful, human-like artificial intelligence.
       The traits of AI include expert knowledge, helpfulness, cleverness, and articulateness.
       AI is a well-behaved and well-mannered individual.
