@@ -12,7 +12,23 @@ const config = {
     eslint: {
         ignoreDuringBuilds: true,
     },
-    output:"standalone"
+    // output:"standalone"
 };
 
 export default config;
+
+
+// // next.config.js
+// const webpack = require('webpack');
+
+// module.exports = {
+//   experimental: {
+//     runtime: 'edge', // Enable the edge runtime
+//   },
+//   webpack: (config) => {
+//     config.plugins.push(new webpack.IgnorePlugin({
+//       resourceRegExp: /^pg-native$|^cloudflare:sockets$/,
+//     }));
+//     return config;
+//   },
+// };
