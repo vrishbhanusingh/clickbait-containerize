@@ -6,9 +6,7 @@ import { papers, chats, messages as _messages, generatedTitles } from '~/server/
 import { NextResponse } from 'next/server';
 import { eq } from 'drizzle-orm';
 
-export const config = {
-  runtime: 'edge',
-};
+export const runtime = "edge"
 
 // const OPENAI_API_KEY = process.env.OPENAI_API_SECRET_KEY!;
 const openai = createOpenAI({

@@ -100,9 +100,10 @@ import { chats, messages as _messages } from '~/server/db/schema';
 import { NextResponse } from 'next/server';
 import { eq } from 'drizzle-orm';
 
-export const config = {
-  runtime: 'edge',
-};
+// export const config = {
+//   runtime: 'edge',
+// };
+export const runtime = "edge"
 
 // const OPENAI_API_KEY = process.env.OPENAI_API_SECRET_KEY!;
 const openai = createOpenAI({
@@ -135,6 +136,11 @@ export async function POST(req: Request) {
       START CONTEXT BLOCK
       ${context}
       END OF CONTEXT BLOCK
+
+      START  WEB CONTEXT BLOCK
+      ${context}
+      END OF WEB CONTEXT BLOCK
+
       AI assistant will take into account any CONTEXT BLOCK that is provided in a conversation.
       If the context does not provide the answer to question, the AI assistant will say, "I'm sorry, but I don't know the answer to that question".
       AI assistant will not apologize for previous responses, but instead will indicate new information was gained.

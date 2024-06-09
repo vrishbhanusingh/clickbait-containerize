@@ -44,6 +44,7 @@ export const chats = createTable(
   }
 )
 
+
 export const papers = createTable(
   'papers',
   {

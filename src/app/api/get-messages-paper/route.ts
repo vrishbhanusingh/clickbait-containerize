@@ -3,13 +3,14 @@ import { messages } from "~/server/db/schema";
 import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 
-export const runtime = "edge"
+// export const config = {
+//     runtime: 'edge',
+//   };
 
+  export const runtime = "edge"
   export const POST = async(req: Request) => {
-    const {chatid} = await req.json()
-    // console.log(messages.chatId, chatid)
-    const _messages = await db.select().from(messages).where(eq(messages.chatId, chatid))
-    // console.log(_messages)
+    const { paperId } = await req.json();
+    const _messages = await db.select().from(messages).where(eq(messages.paperId, paperId))
     return NextResponse.json(_messages)
     
   }
