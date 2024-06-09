@@ -17,6 +17,7 @@ import {
 } from '~/components/ui/dropdown-menu';
 import  {NavItems} from '~/config';
 import { Menu } from 'lucide-react';
+import { ClerkProvider,SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
 export default function Header() {
   const navItems = NavItems();
@@ -71,6 +72,13 @@ export default function Header() {
           <div className="fixed inset-0 bg-black bg-opacity-50 z-50">
             <div className="absolute right-0 top-0 left-0 bg-white h-full shadow-lg p-5">
               <ul className="space-y-4">
+                
+            <SignedOut>
+              <SignInButton />
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
                 {navItems.map((item, idx) => (
                   <Link
                     key={idx}

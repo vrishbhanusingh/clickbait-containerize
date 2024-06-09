@@ -1,10 +1,10 @@
 import { usePathname } from 'next/navigation';
-
+import { db } from '~/server/db';
+import { chats } from '~/server/db/schema';
 import { Bell, Briefcase, Home, Settings, User } from 'lucide-react';
 
 export const NavItems = () => {
   const pathname = usePathname();
-
   function isNavItemActive(pathname: string, nav: string) {
     return pathname.includes(nav);
   }
@@ -15,6 +15,13 @@ export const NavItems = () => {
       href: '/',
       icon: <Home size={20} />,
       active: pathname === '/',
+      position: 'top',
+    },
+    {
+      name: 'Papers',
+      href: '/projects',
+      icon: <Briefcase size={20} />,
+      active: isNavItemActive(pathname, '/projects'),
       position: 'top',
     },
     {
@@ -31,13 +38,7 @@ export const NavItems = () => {
       active: isNavItemActive(pathname, '/notifications'),
       position: 'top',
     },
-    {
-      name: 'Projects',
-      href: '/projects',
-      icon: <Briefcase size={20} />,
-      active: isNavItemActive(pathname, '/projects'),
-      position: 'top',
-    },
+
     {
       name: 'Settings',
       href: '/settings',

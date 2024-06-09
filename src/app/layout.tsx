@@ -2,9 +2,12 @@ import "~/styles/globals.css";
 import '@mantine/core/styles.css';
 import { GeistSans } from "geist/font/sans";
 import { ClerkProvider,SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
-import { ColorSchemeScript, MantineProvider } from '@mantine/core';
+
 import Providers from "~/components/provider";
 import { Toaster } from "react-hot-toast";
+import Header from './header';
+import SideNav from "~/components/ui/sideNav";
+
 
 
 export const metadata = {
@@ -23,22 +26,33 @@ export default function RootLayout({
       <Providers>
     <html lang="en" className={`${GeistSans.variable}`}>
 
-    <head><ColorSchemeScript/></head>
+ 
       
       
       
       <body>
-      <header>
+      {/* <header>
             <SignedOut>
               <SignInButton />
             </SignedOut>
             <SignedIn>
               <UserButton />
             </SignedIn>
-      </header>
+      </header> */}
       
-        
-        {children}
+      <Header />
+        <div className="flex">
+          {/* <SideNav /> */}
+          <div className="w-full">
+          <div className="sm:h-[calc(99vh-60px)] ">
+          {/* <div className="w-full flex justify-center mx-auto   overflow-auto h-[calc(100vh - 120px)] overflow-y-auto relative">
+          <div className="w-full md:max-w-6xl"> */}
+          {children}
+          {/* </div>
+          </div> */}
+          </div>
+          </div>
+          </div>
         <Toaster />
         </body>
         {/* <Toaster /> */}

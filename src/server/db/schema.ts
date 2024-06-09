@@ -26,20 +26,7 @@ export const userSystemEnum = pgEnum(
 )
 export const createTable = pgTableCreator((name) => `clickbait-containerize_${name}`);
 
-export const posts = createTable(
-  "post",
-  {
-    id: serial("id").primaryKey(),
-    name: varchar("name", { length: 256 }),
-    createdAt: timestamp("created_at", { withTimezone: true })
-      .default(sql`CURRENT_TIMESTAMP`)
-      .notNull(),
-    updatedAt: timestamp("updatedAt", { withTimezone: true }),
-  },
-  (example) => ({
-    nameIndex: index("name_idx").on(example.name),
-  })
-);
+
 
 export const chats = createTable(
   'chats',
@@ -77,7 +64,7 @@ export const messages = createTable(
   'messages',
   {
     id: serial("id").primaryKey(),
-    chatId: integer("chat_id",).references(()=> chats.id).notNull(),
+    paperId: integer("paper_id",).references(()=> papers.id).notNull(),
     content : varchar("content", {length: 1024} ).notNull(),
     role:userSystemEnum('role').notNull(),
     createdAt: timestamp("created_at", { withTimezone: true })
@@ -91,7 +78,7 @@ export const generatedTitles = createTable(
   'generatedTitles',
   {
     id: serial("id").primaryKey(),
-    chatId: integer("chat_id",).references(()=> chats.id).notNull(),
+    paperId: integer("paper_id",).references(()=> papers.id).notNull(),
     generatedTitle : varchar("generated_title" ).notNull(),
     abstract: varchar('abstract'),
     // role:userSystemEnum('role').notNull(),

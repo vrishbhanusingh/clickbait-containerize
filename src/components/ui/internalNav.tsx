@@ -1,52 +1,4 @@
-// "use client";
 
-// import { usePathname } from "next/navigation";
-// import Link from "next/link";
-
-// const navItems = [
-//   {
-//     path: "/",
-//     name: "Home",
-//   },
-//   {
-//     path: "/now",
-//     name: "Now",
-//   },
-//   {
-//     path: "/guestbook",
-//     name: "Guestbook",
-//   },
-//   {
-//     path: "/writing",
-//     name: "Writing",
-//   },
-// ];
-
-// export default function InternalNavBar() {
-//   let pathname = usePathname() || "/";
-  
-//   return (
-//     <div className="border border-stone-800/90 p-[0.4rem] rounded-lg mb-12 sticky top-4 z-[100] bg-stone-900/80 backdrop-blur-md">
-//       <nav className="flex gap-2 relative justify-start w-full z-[100]  rounded-lg">
-//         {navItems.map((item, index) => {
-//           const isActive = item.path === pathname;
-
-//           return (
-//             <Link
-//               key={item.path}
-//               className={`px-4 py-2 rounded-md text-sm lg:text-base relative no-underline duration-300 ease-in ${
-//                 isActive ? "text-zinc-100" : "text-zinc-400"
-//               }`}
-//               href={item.path}
-//             >
-//               <span>{item.name}</span>
-//             </Link>
-//           );
-//         })}
-//       </nav>
-//     </div>
-//   );
-// }
 
 "use client";
 
@@ -55,45 +7,51 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
-const navItems = [
-  {
-    path: "/",
-    name: "Home",
-  },
-  {
-    path: "/now",
-    name: "Now",
-  },
-  {
-    path: "/guestbook",
-    name: "Guestbook",
-  },
-  {
-    path: "/writing",
-    name: "Writing",
-  },
-];
 
-export default function NavBar() {
+
+export default function NavBar({projectId, userId}) {
+  const navItems = [
+    {
+      path: `/dashboard/${userId}/${projectId}/title-gen-page`,
+      name: "ClickaBait",
+    },
+    {
+      path: `/dashboard/${userId}/${projectId}/pdf-chat`,
+      name: "Research",
+    },
+    {
+      path: `/dashboard/${userId}/${projectId}/search-ads-rag`,
+      name: "SciRag",
+    },
+    {
+      path: `/dashboard/${userId}/${projectId}/writing`,
+      name: "About",
+    },
+  ];
   let pathname = usePathname() || "/";
 
-  if (pathname.includes("/writing/")) {
-    pathname = "/writing";
-  }
+  // if (pathname.includes("/writing/")) {
+  //   pathname = "/writing";
+  // }
+
+
 
   const [hoveredPath, setHoveredPath] = useState(pathname);
 
   return (
-    <div className="border border-stone-800/90 p-[0.4rem] rounded-lg mb-12 sticky top-4 z-[100] bg-stone-900/80 backdrop-blur-md">
+    <div className="border border-black-900/90 p-[0.4rem] rounded-lg mb-12 sticky top-4 z-[100] bg-teal-900/90 backdrop-blur-md shadow-2xl">
+      
       <nav className="flex gap-2 relative justify-start w-full z-[100]  rounded-lg">
         {navItems.map((item, index) => {
+
           const isActive = item.path === pathname;
           
           return (
+            
             <Link
               key={item.path}
               className={`px-4 py-2 rounded-md text-sm lg:text-base relative no-underline duration-300 ease-in ${
-                isActive ? "text-zinc-100" : "text-zinc-400"
+                isActive ? "text-gray-100" : "text-zinc-200"
               }`}
               data-active={isActive}
               href={item.path}
@@ -111,10 +69,10 @@ export default function NavBar() {
                   }}
                   transition={{
                     type: "spring",
-                    bounce: 0.25,
-                    stiffness: 130,
-                    damping: 9,
-                    duration: 0.3,
+                    bounce: 0.01,
+                    stiffness: 500,
+                    damping: 30,
+                    duration: 0.25,
                   }}
                 />
               )}

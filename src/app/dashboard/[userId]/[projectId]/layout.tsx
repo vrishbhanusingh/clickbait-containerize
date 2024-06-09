@@ -1,20 +1,20 @@
+"use client";
 import TopNav from '~/components/ui/dashTopNav';
 import InternalNavBar from '~/components/ui/internalNav';
-
 import SideNav from '~/components/ui/sideNav';
-import Sidebar from '~/components/ui/sidebar/SideBar';
-import { TopBar } from '~/components/ui/topBar';
- 
-export default function Layout({ children }: { children: React.ReactNode }) {
-  return (
-    <div className=''>
-      <div className=''>
-      {/* <TopBar />
-      <Sidebar mobileOrientation='start' /> */}
-      <div><InternalNavBar/></div>
+import { useParams } from 'next/navigation';
 
+export default function Layout({ children }: { children: React.ReactNode }) {
+  const params = useParams();
+  const { userId, projectId } = params;
+  return (
+    <div className='flex flex-col items-center'>
+      <div className='w-full flex justify-center'>
+        {userId && projectId && (
+          <InternalNavBar projectId={projectId} userId={userId} />
+        )}
       </div>
-      <div>{children}</div>
+      <div className='flex-grow'>{children}</div>
     </div>
   );
 }

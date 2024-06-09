@@ -10,7 +10,10 @@ import axios from 'axios';
 import {useRouter} from 'next/navigation';
 import { useState } from "react";
 import { Button } from './ui/button';
-const FileUpload = () => {
+type Props = {
+    isPro: boolean;
+  };
+const FileUploadPaper = (userId) => {
   const router = useRouter()
   const [uploading, setUploading] = React.useState(false);
   const [abstractText, setAbstractText] = useState("");
@@ -30,7 +33,7 @@ const FileUpload = () => {
           abstract: string;
         }) => {
           try {
-            const response = await axios.post("/api/create-chat", {
+            const response = await axios.post("/api/create-paper", {
               file_key,
               file_name,
               abstract,
@@ -102,10 +105,10 @@ const FileUpload = () => {
         file_name: fileName,
         abstract: abstractText,
       }, {
-        onSuccess: ({ chat_id }) => {
+        onSuccess: ({ paper_id }) => {
           toast.success("Chat created!");
-          console.log(`chat id is: ${chat_id}`);
-          router.push(`/chat/${chat_id}`);
+          console.log(`chat id is: ${paper_id}`);
+          router.push(`/dashboard/${userId}/${paper_id}`);
         },
         onError: (err) => {
           toast.error("Error creating chat");
@@ -163,4 +166,4 @@ const FileUpload = () => {
     );
 };
 
-export default FileUpload;
+export default FileUploadPaper;

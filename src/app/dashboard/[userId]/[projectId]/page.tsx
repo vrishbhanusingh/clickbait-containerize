@@ -3,12 +3,16 @@ import React from 'react'
 
 type Props = {
   params: {
-      userId:string
+      userId:string;
+      projectId:string
   }
 }
-const page = ({ params: { userId } }: Props) => {
+const page = ({ params: { userId, projectId } }: Props) => {
   return (
-    <div>page</div>
+    <div>page
+      {/* {projectId} */}
+    </div>
+    
   )
 }
 
