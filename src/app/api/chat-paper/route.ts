@@ -11,8 +11,7 @@ import { validateQueryWeb } from '~/app/actions/webRelevantOrNot';
 import { validateNeedWebSearch } from '~/app/actions/NeedWebSearch';
 
 export const runtime = "edge"
-export const maxDuration = 60;
-export const dynamic = 'force-dynamic';
+
 async function fetchWebContext(content, fileKey) {
   const { context: contextWeb } = await getContextWeb(content, fileKey);
   const formattedContextWeb = contextWeb.map((item) => {
@@ -30,7 +29,7 @@ const openai = createOpenAI({
   apiKey: process.env.OPENAI_API_SECRET_KEY,
 });
 
-export const maxDuration = 30;
+export const maxDuration = 60;
 
 export async function POST(req: Request) {
   try {
