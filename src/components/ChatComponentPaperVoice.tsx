@@ -1,6 +1,5 @@
 "use client";
 import React, { useRef, useState } from "react";
-// import { useActions, readStreamableValue, createAI } from "ai/rsc";
 import { useChat } from "ai/react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
@@ -11,6 +10,7 @@ import axios from "axios";
 import { Message } from "ai";
 import { generateTTS, transcribeAudio } from "~/server/audio";
 import { speechToText } from "~/lib/speechToText";
+
 type Props = { paperId: number };
 
 const ChatComponentPaperVoice = ({ paperId }: Props) => {
@@ -32,7 +32,7 @@ const ChatComponentPaperVoice = ({ paperId }: Props) => {
       return response.data;
     },
   });
-  // console.log(data)
+
   const {
     input,
     handleInputChange,
@@ -48,7 +48,6 @@ const ChatComponentPaperVoice = ({ paperId }: Props) => {
     initialMessages: data ?? [],
     async onFinish(message) {
       console.log("message :>> ", message);
-      // console.log("voicePrompt :>> ", voicePrompt);
       console.log("voicePromptRef :>> ", voicePromptRef);
       const lastMessage = messages[messages.length - 2];
 
@@ -56,7 +55,6 @@ const ChatComponentPaperVoice = ({ paperId }: Props) => {
         "lastMessage :>> ",
         messages.filter((msg) => msg.role === "user"),
       );
-      // @ts-ignore
       if (voicePromptRef.current) {
         setAudioLoading(true);
         const speechData = await generateTTS(message.content);
@@ -116,7 +114,6 @@ const ChatComponentPaperVoice = ({ paperId }: Props) => {
         speechToText(audioBlob, async (data: string) => {
           voicePromptRef.current = true;
           const transcription = await transcribeAudio(data);
-          // const transcription = "Hello";
           if (transcription.status) {
             console.log("transcription :>> ", transcription);
             append({
@@ -134,54 +131,54 @@ const ChatComponentPaperVoice = ({ paperId }: Props) => {
   };
 
   return (
-    <div className="flex h-full flex-col scrollbar-hide" id="message-container">
-      {/* header */}
-      <div className="bg-white p-2">
-        <h3 className="text-xl font-bold">Chat</h3>
+    <div className="fixed h-[550px] bottom-4 right-4 w-80 bg-white shadow-lg rounded-lg overflow-hidden flex flex-col">
+      {/* Header */}
+      <div className="bg-teal-800 text-white p-3">
+        <h3 className="text-lg font-bold">Chat</h3>
       </div>
 
-      {/* message list */}
-      <div className="flex h-full flex-1 flex-col">
-        <div className="w-full flex-1 flex-row overflow-auto">
-          <MessageList messages={messages} isLoading={isLoading} />
-        </div>
-        <div className="flex w-full justify-center">
-          {isLoading || audioLoading ? (
-            <div className="h-fit rounded-full border border-gray-300 bg-gray-100 p-4 shadow-lg">
-              <Loader2 size={24} className="animate-spin" />
-            </div>
-          ) : audioPlaying ? (
-            <div className="h-fit rounded-full border border-gray-300 bg-gray-100 p-4 shadow-lg">
-              <Volume2 size={24} />
-            </div>
-          ) : (
-            <Button
-              onMouseDown={handleRecording}
-              onMouseUp={handleRecording}
-              onTouchStart={handleRecording}
-              onTouchEnd={handleRecording}
-              className="h-fit rounded-full bg-red-600 p-4 shadow-lg"
-            >
-              {recording ? <StopCircle size={24} /> : <Mic size={24} />}
-            </Button>
-          )}
-        </div>
-        <div className="px-2 py-4">
-          <form onSubmit={handleSubmit} className="bg-gray-50">
-            <div className="flex">
-              <Input
-                value={input}
-                onChange={handleInputChange}
-                placeholder="Ask any question..."
-                className="w-full"
-                disabled={isLoading}
-              />
-              <Button className="ml-2 bg-teal-800" disabled={isLoading}>
-                <Send className="h-4 w-4" />
-              </Button>
-            </div>
-          </form>
-        </div>
+      {/* Message List */}
+      <div className="flex-1 p-2 overflow-y-auto">
+        <MessageList messages={messages} isLoading={isLoading} />
+      </div>
+
+      {/* Recording & Sending Controls */}
+      <div className="p-2 flex justify-center items-center">
+        {isLoading || audioLoading ? (
+          <div className="h-fit rounded-full border border-gray-300 bg-gray-100 p-4 shadow-lg">
+            <Loader2 size={24} className="animate-spin" />
+          </div>
+        ) : audioPlaying ? (
+          <div className="h-fit rounded-full border border-gray-300 bg-gray-100 p-4 shadow-lg">
+            <Volume2 size={24} />
+          </div>
+        ) : (
+          <Button
+            onMouseDown={handleRecording}
+            onMouseUp={handleRecording}
+            onTouchStart={handleRecording}
+            onTouchEnd={handleRecording}
+            className="h-fit rounded-full bg-red-600 p-4 shadow-lg"
+          >
+            {recording ? <StopCircle size={24} /> : <Mic size={24} />}
+          </Button>
+        )}
+      </div>
+
+      {/* Text Input */}
+      <div className="p-2 bg-gray-50 border-t">
+        <form onSubmit={handleSubmit} className="flex">
+          <Input
+            value={input}
+            onChange={handleInputChange}
+            placeholder="Ask any question..."
+            className="flex-1"
+            disabled={isLoading}
+          />
+          <Button type="submit" className="ml-2 bg-teal-800" disabled={isLoading}>
+            <Send className="h-4 w-4" />
+          </Button>
+        </form>
       </div>
     </div>
   );

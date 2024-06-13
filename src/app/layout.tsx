@@ -63,7 +63,6 @@ import { ClerkProvider, SignInButton, SignedIn, SignedOut, UserButton } from "@c
 import Providers from "~/components/provider";
 import { Toaster } from "react-hot-toast";
 import Header from './header';
-import SideNav from "~/components/ui/sideNav";
 
 export const metadata = {
   title: "Clickbait",
@@ -79,14 +78,10 @@ export default function RootLayout({
     <ClerkProvider>
       <Providers>
         <html lang="en" className={`${GeistSans.variable}`}>
-          <body className="flex flex-col min-h-screen">
+          <body className="">
             <Header />
-            <div className="flex flex-grow pt-20">
-             
-              <main className="flex-grow p-10">
+            <div className="h-[120px] w-full"></div>
                 {children}
-              </main>
-            </div>
             <Toaster />
           </body>
         </html>
