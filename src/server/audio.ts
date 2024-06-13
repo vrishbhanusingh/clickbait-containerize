@@ -63,6 +63,7 @@
 // import Groq from "groq-sdk";
 import OpenAI from "openai";
 import fs from "fs";
+// import { openai } from "@ai-sdk/openai";
 // import { openAIClient } from "./openai";
 // import { config } from "../config";
 // import { traceable } from "langsmith/traceable";
@@ -75,18 +76,19 @@ const openAIClient = new OpenAI({
 
 export const transcribeAudio = async (audioData: string) => {
   const audio = Buffer.from(audioData, "base64");
-  const filePath = "./tmp/input.wav";
+  const audioBlob = new Blob([audio], { type: "audio/webm" });
+  // const filePath = "./tmp/input.wav";
   try {
     let transcription;
 
-    fs.writeFileSync(filePath, audio);
+    // fs.writeFileSync(filePath, audio);
 
-    const readStream = fs.createReadStream(filePath);
+    // const readStream = fs.createReadStream(filePath);
 
     console.log("openAIClient :>> ", openAIClient.audio);
     // if (config.whisperModelProvider === "openai") {
     transcription = await openAIClient.audio.transcriptions.create({
-      file: readStream,
+      file: await OpenAI.toFile(audioBlob, `audio-${Date.now()}.wav`),
       model: "whisper-1",
     });
     console.log("transcription :>> ", transcription);
