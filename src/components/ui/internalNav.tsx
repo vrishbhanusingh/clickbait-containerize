@@ -39,6 +39,7 @@ export default function NavBar({projectId, userId}) {
   const [hoveredPath, setHoveredPath] = useState(pathname);
 
   return (
+    <div className="fixed top-20 z-50">
     <div className="border border-black-900/90 p-[0.4rem] rounded-lg mb-12 sticky top-4 z-[100] bg-teal-900/90 backdrop-blur-md shadow-2xl">
       
       <nav className="flex gap-2 relative justify-start w-full z-[100]  rounded-lg">
@@ -80,6 +81,7 @@ export default function NavBar({projectId, userId}) {
           );
         })}
       </nav>
+    </div>
     </div>
   );
 }

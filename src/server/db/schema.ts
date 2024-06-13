@@ -11,6 +11,7 @@ import {
   serial,
   timestamp,
   varchar,
+  PgArray,
 } from "drizzle-orm/pg-core";
 
 /**
@@ -66,7 +67,7 @@ export const messages = createTable(
   {
     id: serial("id").primaryKey(),
     paperId: integer("paper_id",).references(()=> papers.id).notNull(),
-    content : varchar("content", {length: 1024} ).notNull(),
+    content : varchar("content", {length: 2048} ).notNull(),
     role:userSystemEnum('role').notNull(),
     createdAt: timestamp("created_at", { withTimezone: true })
       .default(sql`CURRENT_TIMESTAMP`)
@@ -82,6 +83,7 @@ export const generatedTitles = createTable(
     paperId: integer("paper_id",).references(()=> papers.id).notNull(),
     generatedTitle : varchar("generated_title" ).notNull(),
     abstract: varchar('abstract'),
+    linksUsed : varchar("links_used" ),
     // role:userSystemEnum('role').notNull(),
     createdAt: timestamp("created_at", { withTimezone: true })
       .default(sql`CURRENT_TIMESTAMP`)
@@ -89,5 +91,22 @@ export const generatedTitles = createTable(
     updatedAt: timestamp("updatedAt", { withTimezone: true }),}
 
 )
+export const generatedTitles2 = createTable(
+  'generatedTitles2',
+  {
+    id: serial("id").primaryKey(),
+    paperId: integer("paper_id").references(()=> papers.id).unique().notNull(),
+    generatedTitle : varchar("generated_title" ).notNull(),
+    abstract: varchar('abstract'),
+    linksUsed : varchar("links_used" ),
+    pageNames : varchar("page_names" ),
+    // role:userSystemEnum('role').notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .default(sql`CURRENT_TIMESTAMP`)
+      .notNull(),
+    updatedAt: timestamp("updatedAt", { withTimezone: true })}
+)
+
+
 export type DrizzleChat = typeof chats.$inferSelect;
 export type DrizzlePaper = typeof papers.$inferSelect;

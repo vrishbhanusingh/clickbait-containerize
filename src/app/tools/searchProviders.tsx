@@ -64,7 +64,7 @@ export async function serperSearch(message: string, numberOfPagesToScan = 10): P
     const requestOptions: RequestInit = {
         method: 'POST',
         headers: {
-            'X-API-KEY': process.env.SERPER_API as string,
+            'X-API-KEY': process.env.SERPER_API_KEY!,
             'Content-Type': 'application/json'
         },
         body: data
@@ -83,7 +83,6 @@ export async function serperSearch(message: string, numberOfPagesToScan = 10): P
             link: result.link,
             favicon: result.favicons?.[0] || ''
         }));
-        console.log(final);
         return final
     } catch (error) {
         console.error('Error fetching search results:', error);

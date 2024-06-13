@@ -1,20 +1,172 @@
 
 
+// import { type CoreMessage, streamText } from 'ai';
+// import { createOpenAI } from '@ai-sdk/openai';
+// import { getContextPdf , getContextWeb, getContextAds } from '~/lib/context';
+// import { db } from '~/server/db';
+// import { papers, messages as _messages } from '~/server/db/schema';
+// import { NextResponse } from 'next/server';
+// import { eq } from 'drizzle-orm';
+// import { validateQueryWeb } from '~/app/actions/webRelevantOrNot';
+// import { validateNeedWebSearch } from '~/app/actions/NeedWebSearch';
+
+// export const runtime = "edge"
+
+// async function fetchWebContext(content, fileKey) {
+//   const {context:contextWeb } = await getContextWeb(content, fileKey);
+//   const formattedContextWeb = contextWeb.map((item) => {
+//     return `web page name :${item.title}\nweb page content:${item.content}\n`;
+//   })
+//   const finalWebContext = formattedContextWeb.join('\n')
+
+//   const links = contextWeb.map((item) => {
+//     return item.url;
+//   })
+//   const webpagenames = contextWeb.map((item) => {
+//       return item.title;
+//     })
+
+//   return {finalWebContext, links, webpagenames};
+// }
+// // const OPENAI_API_KEY = process.env.OPENAI_API_SECRET_KEY!;
+// const openai = createOpenAI({
+//   apiKey: process.env.OPENAI_API_SECRET_KEY,
+// });
+// // Allow streaming responses up to 30 seconds
+// export const maxDuration = 30;
+
+// export async function POST(req: Request) {
+//   try {
+//     const { messages, paperId } = await req.json();
+
+//     const _papers = await db.select().from(papers).where(eq(papers.id, paperId));
+
+//     if (_papers.length !== 1) {
+//       console.log('paper not found');
+//       return NextResponse.json({ error: 'paper not found' }, { status: 404 });
+//     }
+
+//     const fileKey = _papers[0].fileKey;
+//     const lastMessage = messages[messages.length - 1];
+//     const pdfContext = await getContextPdf(lastMessage.content, fileKey);
+//     const WebSearchNeeded = await validateNeedWebSearch(lastMessage.content, pdfContext);
+//     console.log(WebSearchNeeded)
+//     let finalWebContext = ''
+//     let links = []
+//     let webpagenames = []
+    
+//     if(WebSearchNeeded){
+//       let {finalWebContext, links , webpagenames}  = await fetchWebContext(lastMessage.content, fileKey);
+//       let webRelevant = await validateQueryWeb(lastMessage.content, finalWebContext);
+      
+//       // let retries = 0;
+//       // const maxRetries = 0;
+//       if (!webRelevant) {
+//         ({finalWebContext , links , webpagenames}  = await fetchWebContext(lastMessage.content, fileKey));
+//         webRelevant = await validateQueryWeb(lastMessage.content, finalWebContext);
+    
+//       }
+//     } else {
+      
+//     }
+//     console.log(webRelevant)
+//     // const {context:contextWeb } = await getContextWeb(lastMessage.content, fileKey);
+
+//     // const formattedContextWeb = contextWeb.map((item) => {
+//     //     return `web page name :${item.title}\nweb page content:${item.content}\n`;
+//     //   })
+//     //   const finalWebContext = formattedContextWeb.join('\n')
+      
+
+//       // const links = contextWeb.map((item) => {
+//       //   return item.url;
+//       // })
+//       // const webpagenames = contextWeb.map((item) => {
+//       //     return item.title;
+//       //   })
+
+//     console.log(finalWebContext)
+//     const systemPrompt = `AI assistant is a brand new, powerful, human-like artificial intelligence.
+//       The traits of AI include expert knowledge, helpfulness, cleverness, and articulateness.
+//       AI is a well-behaved and well-mannered individual.
+//       AI is always friendly, kind, and inspiring, and he is eager to provide vivid and thoughtful responses to the user.
+//       AI has the sum of all knowledge in their brain, and is able to accurately answer nearly any question about any topic in conversation.
+//       AI is an expert in the field of academics and is well known for his ability to answer complex questions releated to science and technology.
+//       AI has access to the internet and can access information from any website.
+//       AI can access this information in the WEB CONTEXT BLOCK that is provided in a conversation.
+//       AI has access to real-time information or the ability to browse the internet to provide updates.
+//       START PDF CONTEXT BLOCK
+//       ${pdfContext}
+//       END OF PDFCONTEXT BLOCK
+
+//       START  WEB CONTEXT BLOCK
+//       ${finalWebContext}
+//       END OF WEB CONTEXT BLOCK
+
+//       AI assistant will take into account PDF CONTEXT BLOCK, WEB CONTEXT BLOCK that is provided in a conversation.
+//       If the context does not provide the answer to question, the AI assistant will say, "I'm sorry, but I don't know the answer to that question".
+//       AI assistant will not apologize for previous responses, but instead will indicate new information was gained.
+//       AI assistant will not invent anything that is not drawn directly from the context.`;
+
+//     // Save user message into db
+//     await db.insert(_messages).values({
+//       paperId: paperId,
+//       content: lastMessage.content,
+//       role: 'user',
+//     });
+
+
+//     console.log(systemPrompt)
+//     const result = await streamText({
+//       model: openai('gpt-3.5-turbo'),
+//       system: systemPrompt,
+//       messages: messages as CoreMessage[],
+//       async onFinish({ text, toolCalls, toolResults, usage, finishReason }) {
+//         // implement your own storage logic:
+//         await db.insert(_messages).values({
+//           paperId: paperId,
+//           content: text,
+//           role: 'system',
+//         });
+//       },});
+
+
+//     return result.toAIStreamResponse();
+//   } catch (error) {
+//     console.log(error);
+//     return NextResponse.json({ error: error.message }, { status: 500 });
+//   }
+// }
+
 import { type CoreMessage, streamText } from 'ai';
 import { createOpenAI } from '@ai-sdk/openai';
-import { getContextPdf , getContextWeb, getContextAds } from '~/lib/context';
+import { getContextPdf, getContextWeb, getContextAds } from '~/lib/context';
 import { db } from '~/server/db';
 import { papers, messages as _messages } from '~/server/db/schema';
 import { NextResponse } from 'next/server';
 import { eq } from 'drizzle-orm';
+import { validateQueryWeb } from '~/app/actions/webRelevantOrNot';
+import { validateNeedWebSearch } from '~/app/actions/NeedWebSearch';
 
 export const runtime = "edge"
 
-// const OPENAI_API_KEY = process.env.OPENAI_API_SECRET_KEY!;
+async function fetchWebContext(content, fileKey) {
+  const { context: contextWeb } = await getContextWeb(content, fileKey);
+  const formattedContextWeb = contextWeb.map((item) => {
+    return `web page name: ${item.title}\nweb page content: ${item.content}\n`;
+  });
+  const finalWebContext = formattedContextWeb.join('\n');
+
+  const links = contextWeb.map((item) => item.url);
+  const webpagenames = contextWeb.map((item) => item.title);
+
+  return { finalWebContext, links, webpagenames };
+}
+
 const openai = createOpenAI({
   apiKey: process.env.OPENAI_API_SECRET_KEY,
 });
-// Allow streaming responses up to 30 seconds
+
 export const maxDuration = 30;
 
 export async function POST(req: Request) {
@@ -24,62 +176,77 @@ export async function POST(req: Request) {
     const _papers = await db.select().from(papers).where(eq(papers.id, paperId));
 
     if (_papers.length !== 1) {
-      console.log('paper not found');
-      return NextResponse.json({ error: 'paper not found' }, { status: 404 });
+      console.log('Paper not found');
+      return NextResponse.json({ error: 'Paper not found' }, { status: 404 });
     }
 
     const fileKey = _papers[0].fileKey;
     const lastMessage = messages[messages.length - 1];
     const pdfContext = await getContextPdf(lastMessage.content, fileKey);
-    const webContext = await getContextWeb(lastMessage.content, fileKey);
-    const adsContext = await getContextAds(lastMessage.content, fileKey);
+    const WebSearchNeeded = await validateNeedWebSearch(lastMessage.content, pdfContext);
+    console.log(WebSearchNeeded);
 
-    console.log(pdfContext, webContext, adsContext)
+    let finalWebContext = '';
+    let links = [];
+    let webpagenames = [];
+    let webRelevant = false;
+
+    if (WebSearchNeeded) {
+      ({ finalWebContext, links, webpagenames } = await fetchWebContext(lastMessage.content, fileKey));
+      webRelevant = await validateQueryWeb(lastMessage.content, finalWebContext);
+
+      if (!webRelevant) {
+        ({ finalWebContext, links, webpagenames } = await fetchWebContext(lastMessage.content, fileKey));
+        webRelevant = await validateQueryWeb(lastMessage.content, finalWebContext);
+      }
+    }
+
+    console.log(webRelevant);
+    console.log(finalWebContext);
+
     const systemPrompt = `AI assistant is a brand new, powerful, human-like artificial intelligence.
       The traits of AI include expert knowledge, helpfulness, cleverness, and articulateness.
       AI is a well-behaved and well-mannered individual.
       AI is always friendly, kind, and inspiring, and he is eager to provide vivid and thoughtful responses to the user.
       AI has the sum of all knowledge in their brain, and is able to accurately answer nearly any question about any topic in conversation.
-      AI assistant is a big fan of Pinecone and Vercel.
+      AI is an expert in the field of academics and is well known for his ability to answer complex questions related to science and technology.
+      AI has access to the internet and can access information from any website.
+      AI can access this information in the WEB CONTEXT BLOCK that is provided in a conversation.
+      AI has access to real-time information or the ability to browse the internet to provide updates.
       START PDF CONTEXT BLOCK
       ${pdfContext}
-      END OF PDFCONTEXT BLOCK
+      END OF PDF CONTEXT BLOCK
 
-      START  WEB CONTEXT BLOCK
-      ${webContext}
+      START WEB CONTEXT BLOCK
+      ${finalWebContext}
       END OF WEB CONTEXT BLOCK
-
-      START  ADS CONTEXT BLOCK
-      ${webContext}
-      END OF ADS CONTEXT BLOCK
-
-      AI assistant will take into account PDF CONTEXT BLOCK, WEB CONTEXT BLOCK and ADS CONTEXT BLOCK that is provided in a conversation.
+      
+      AI assistant will take into account PDF CONTEXT BLOCK, WEB CONTEXT BLOCK that is provided in a conversation.
+      If the WEB CONTEXT BLOCK is empty, AI assistant will say, "I am not able to retrieve information for this question."
+      AI assitant if asked a question requiring real time information that needs access to the internet, it will use real time information from the WEB CONTEXT BLOCK.
       If the context does not provide the answer to question, the AI assistant will say, "I'm sorry, but I don't know the answer to that question".
       AI assistant will not apologize for previous responses, but instead will indicate new information was gained.
       AI assistant will not invent anything that is not drawn directly from the context.`;
 
-    // Save user message into db
     await db.insert(_messages).values({
       paperId: paperId,
       content: lastMessage.content,
       role: 'user',
     });
 
-
-
+    console.log(systemPrompt);
     const result = await streamText({
       model: openai('gpt-3.5-turbo'),
       system: systemPrompt,
       messages: messages as CoreMessage[],
       async onFinish({ text, toolCalls, toolResults, usage, finishReason }) {
-        // implement your own storage logic:
         await db.insert(_messages).values({
           paperId: paperId,
           content: text,
           role: 'system',
         });
-      },});
-
+      },
+    });
 
     return result.toAIStreamResponse();
   } catch (error) {
@@ -87,6 +254,5 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
-
 
 

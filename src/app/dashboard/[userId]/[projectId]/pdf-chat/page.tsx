@@ -10,6 +10,8 @@ import PDFViewer from '~/components/ui/PDFViewer';
 import ChatComponent from '~/components/ChatComponent';
 import GenratedTitle from '~/components/titleGen';
 import ChatComponentPaper from '~/components/ChatComponentPaper';
+import PDFViewerNew from '~/components/ui/PdfViewerNew';
+import ChatComponentPaperVoice from '~/components/ChatComponentPaperVoice';
 // import { useParams } from 'next/navigation';
 // type Props = {
 //     params: {
@@ -51,7 +53,7 @@ const ChatPagePaper = async ( props ) => {
     <PDFViewer pdf_url={currentPaper?.pdfUrl ?? " "} />
     
     </div>
-    <div className="flex-[3] border-l-4 border-l-slate-200 scrollbar-hide"><ChatComponentPaper paperId = {parseInt(projectId)}/></div>
+    <div className="flex-[3] border-l-4 border-l-slate-200 scrollbar-hide"><ChatComponentPaperVoice paperId = {parseInt(projectId)}/></div>
     
     </div>
     </div>

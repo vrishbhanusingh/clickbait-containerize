@@ -21,7 +21,7 @@ export default function SideNav() {
     setIsSidebarExpanded(!isSidebarExpanded);
   };
   return (
-    <div className='pr-4'>
+    <div className='pr-4 fixed top-16 left-0 bottom-0 z-40'>
       <div
         className={cn(
           isSidebarExpanded ? 'w-[200px]' : 'w-[68px]',

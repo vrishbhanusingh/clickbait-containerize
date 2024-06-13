@@ -35,7 +35,7 @@ export default async function HomePage() {
       <GoToDashButton />
     ) : (
       <Link href="/sign-in">
-        <Button>Sign in</Button>
+        <Button>Get started</Button>
       </Link>
     )}
   </div>

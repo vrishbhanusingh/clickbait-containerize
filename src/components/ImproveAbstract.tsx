@@ -4,9 +4,9 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import {ThumbsUp} from 'lucide-react'
 import{ Button } from './ui/button';
-type Props = { paperId: number };
+type Props = { chatid: number };
 
-const GenratedTitlePaper = ({ paperId }: Props) => {
+const ImprovedAbstract = ({ paperId }: Props) => {
     const { data: title, isLoading, error } = useQuery({
       queryKey: ['getTitleGen', paperId],
       queryFn: async () => {
@@ -42,4 +42,4 @@ const GenratedTitlePaper = ({ paperId }: Props) => {
 
 
 
-export default GenratedTitlePaper;
+export default ImprovedAbstract;

@@ -14,7 +14,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <InternalNavBar projectId={projectId} userId={userId} />
         )}
       </div>
-      <div className='flex-grow'>{children}</div>
+      <div className='flex-grow z-auto'>{children}</div>
     </div>
   );
 }
