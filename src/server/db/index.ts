@@ -22,7 +22,7 @@ import { neon } from "@neondatabase/serverless";
 import { drizzle } from "drizzle-orm/neon-http";
 
 // neonConfig.fetchConnectionCache = true;
-console.log(process.env.DATABASE_URL);
+// console.log(process.env.DATABASE_URL);
 // if (!process.env.DATABASE_URL) {
 //   throw new Error("database url not found");
 // }

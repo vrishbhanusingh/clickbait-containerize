@@ -72,12 +72,12 @@ const openAIClient = new OpenAI({
   apiKey: process.env.OPENAI_API_SECRET_KEY,
 });
 
+
 export const transcribeAudio = async (audioData: string) => {
   const audio = Buffer.from(audioData, "base64");
-  const filePath = "./tmp/input.wav";
+  const filePath = "./public/tmp/input.wav";
   try {
     let transcription;
-
     fs.writeFileSync(filePath, audio);
 
     const readStream = fs.createReadStream(filePath);
@@ -110,7 +110,7 @@ export const generateTTS = async (text: string) => {
   try {
     const mp3 = await openAIClient.audio.speech.create({
       model: "tts-1",
-      voice: "alloy",
+      voice: "shimmer",
       input: text,
     });
     const buffer = Buffer.from(await mp3.arrayBuffer());
