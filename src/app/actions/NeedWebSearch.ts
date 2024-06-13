@@ -3,6 +3,8 @@
 import { generateObject } from 'ai';
 import { createOpenAI } from '@ai-sdk/openai';
 import { z } from 'zod';
+export const maxDuration = 60;
+export const dynamic = 'force-dynamic';
 const openai = createOpenAI({
     apiKey: process.env.OPENAI_API_SECRET_KEY,
   });

@@ -4,6 +4,8 @@ import { db } from '~/server/db';
 import { papers, generatedTitles2 } from '~/server/db/schema';
 import { eq } from 'drizzle-orm';
 
+export const maxDuration = 60;
+export const dynamic = 'force-dynamic';
 export const fetchPapersByUser = async (userId) => {
   try {
     // Fetch all papers for the given userId

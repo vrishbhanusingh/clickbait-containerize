@@ -27,7 +27,7 @@ export async function downloadfromS3(file_key: string): Promise<string | null> {
     }
 
     // Ensure the tmp directory exists
-    const tmpDir = 'tmp';
+    const tmpDir = '/tmp';
     if (!fs.existsSync(tmpDir)) {
       fs.mkdirSync(tmpDir);
     }

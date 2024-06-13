@@ -2,7 +2,8 @@
 
 import { generateText } from 'ai';
 import { createOpenAI } from '@ai-sdk/openai';
-
+export const maxDuration = 60;
+export const dynamic = 'force-dynamic';
 
 // export const runtime = "edge"
 // Set up OpenAI configuration

@@ -6,7 +6,8 @@ import { db } from '~/server/db';
 import { papers, chats, messages as _messages, generatedTitles2 } from '~/server/db/schema';
 import { NextResponse } from 'next/server';
 import { eq } from 'drizzle-orm';
-
+export const maxDuration = 60;
+export const dynamic = 'force-dynamic';
 
 
 export const getTitle = async (paperId) => {

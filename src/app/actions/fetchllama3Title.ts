@@ -1,22 +1,7 @@
-// export async function fetchFromNgrokAPI(prompt:string) {
-//     const url = 'https://72d0-34-171-145-140.ngrok-free.app/generate';
-//     const response = await fetch(url, {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json'
-//       },
-//       body: JSON.stringify({ input: prompt })
-//     });
-  
-//     if (!response.ok) {
-//       throw new Error('Failed to fetch data from ngrok API');
-//     }
-  
-//     const data = await response.json();
-//     return data.output;
-//   }
-
-  export async function fetchFromNgrokAPI(context, abstract) {
+'use server';
+export const maxDuration = 60;
+export const dynamic = 'force-dynamic';
+export async function fetchFromNgrokAPI(context, abstract) {
     const url = "https://ac36-34-31-140-244.ngrok-free.app/generate";
     const data = { context, abstract };
     const headers = {
