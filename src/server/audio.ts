@@ -75,7 +75,7 @@ const openAIClient = new OpenAI({
 
 export const transcribeAudio = async (audioData: string) => {
   const audio = Buffer.from(audioData, "base64");
-  const filePath = "./public/tmp/input.wav";
+  const filePath = "./tmp/input.wav";
   try {
     let transcription;
 
