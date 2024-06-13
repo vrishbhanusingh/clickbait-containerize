@@ -5,7 +5,7 @@
 // import Sidebar from '~/components/ui/sidebar/SideBar';
 // import { TopBar } from '~/components/ui/topBar';
 // import SideNav from "~/components/ui/sideNav";
-// export default function Layout({ children }: { children: React.ReactNode }) {
+// export default function Layout({ children }: { children: Reauplct.ReactNode }) {
 //   return (
 //     <div className="flex">
 //     <SideNav  />
@@ -25,9 +25,9 @@ import SideNav from "~/components/ui/sideNav";
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
 
-    <div className="flex flex-grow">
+    <div className="flex">
       <SideNav  />
-      <div className="flex-grow ml-64 p-4">
+      <div className="ml-64 p-4">
         {children}
       </div>
     </div>

@@ -16,11 +16,7 @@ type Props = {
 
 
 const page = ({ params: { userId } }: Props) => {
-  // const papers = [
-  //   { id: 1, pdfName: 'Attention Is All You Need', abstract: 'The dominant sequence transduction models are based on complex recurrent or convolutional neural networks in an encoder-decoder configuration. The best performing models also connect the encoder and decoder through an attention mechanism. We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely. Experiments on two machine translation tasks show these models to be superior in quality while being more parallelizable and requiring significantly less time to train. Our model achieves 28.4 BLEU on the WMT 2014 English-to-German translation task, improving over the existing best results, including ensembles by over 2 BLEU. On the WMT 2014 English-to-French translation task, our model establishes a new single-model state-of-the-art BLEU score of 41.8 after training for 3.5 days on eight GPUs, a small fraction of the training costs of the best models from the literature. We show that the Transformer generalizes well to other tasks by applying it successfully to English constituency parsing both with large and limited training data.' },
-  //   { id: 2, pdfName: 'Paper 2', abstract: 'Abstract for Paper 2' },
-  //   { id: 3, pdfName: 'Paper 3', abstract: 'Abstract for Paper 3' },
-  // ];
+
   const [selectedPaper, setSelectedPaper] = useState(null);
   const [papers, setPapers] = useState([]);
   // const [selectedPaper, setSelectedPaper] = useState<number | null>(null);
@@ -41,17 +37,19 @@ const page = ({ params: { userId } }: Props) => {
   }, [userId]);
   console.log(papers)
   return (
-    <div className='flex flex-col items-center justify-center min-h-screen'>
+    <div>
+      <div className='w-full h-[120px]'></div>
+      <div className='flex gap-6'>
       <div className='border border-gray-300 shadow-lg rounded-lg p-6 w-full max-w-md mb-8'>
         <h2 className='text-lg font-semibold mb-4 flex items-center space-x-2'>
           <Upload />
           <span>Upload a new paper</span>
         </h2>
-        <FileUploadPaper UserId={userId} />
+        <FileUploadPaper userId={userId} />
       </div>
       <div className='w-full'>
         <h2 className='text-lg font-semibold mb-4'>Your Papers</h2>
-        <div className='rounded-lg p-4 mb-4' style={{ maxHeight: '300px' }}>
+        <div className='rounded-lg p-4 mb-4'>
           {papers.map((paper) => (
             <div key={paper.id} className='border border-gray-300 shadow-lg rounded-lg p-4 mb-4  '>
               <div className='flex justify-between items-center mb-2 overflow-y-auto'>
@@ -72,6 +70,7 @@ const page = ({ params: { userId } }: Props) => {
           ))}
         </div>
       </div>
+    </div>
     </div>
   );
 };

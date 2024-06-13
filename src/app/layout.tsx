@@ -79,14 +79,9 @@ export default function RootLayout({
     <ClerkProvider>
       <Providers>
         <html lang="en" className={`${GeistSans.variable}`}>
-          <body className="flex flex-col min-h-screen">
+          <body className="">
             <Header />
-            <div className="flex flex-grow pt-20">
-             
-              <main className="flex-grow p-10">
                 {children}
-              </main>
-            </div>
             <Toaster />
           </body>
         </html>
