@@ -47,7 +47,7 @@ const page = ({ params: { userId } }: Props) => {
           <Upload />
           <span>Upload a new paper</span>
         </h2>
-        <FileUploadPaper UserId={userId} />
+        <FileUploadPaper userId={userId} />
       </div>
       <div className='w-full'>
         <h2 className='text-lg font-semibold mb-4'>Your Papers</h2>

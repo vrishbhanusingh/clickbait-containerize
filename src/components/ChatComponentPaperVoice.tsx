@@ -59,6 +59,7 @@ const ChatComponentPaperVoice = ({ paperId }: Props) => {
       // @ts-ignore
       if (voicePromptRef.current) {
         setAudioLoading(true);
+        console.log(message.content)
         const speechData = await generateTTS(message.content);
         console.log("speechData :>> ", speechData);
         const speech = new Audio(speechData);

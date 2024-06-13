@@ -1,7 +1,5 @@
 'use client';
-
-import { Fragment, useState } from 'react';
-
+import { Fragment, useState, useEffect } from 'react';
 import Link from 'next/link';
 
 import {
@@ -13,9 +11,18 @@ import {
 import { NavItems } from '~/config';
 import { cn } from '~/lib/utils';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { fetchPapersByUser } from '~/app/actions/fetchPapersByUser';
 
-export default function SideNav() {
+export default function SideNav(Papers) {
+  const [selectedPaper, setSelectedPaper] = useState(null);
+  const [papers, setPapers] = useState([]);
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
+
+  // const [selectedPaper, setSelectedPaper] = useState<number | null>(null);
+
+
+  console.log(papers)
+
   const navItems = NavItems();
   const toggleSidebar = () => {
     setIsSidebarExpanded(!isSidebarExpanded);

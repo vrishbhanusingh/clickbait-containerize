@@ -17,7 +17,7 @@
 //   }
 
   export async function fetchFromNgrokAPI(context, abstract) {
-    const url = "https://f06c-35-193-135-122.ngrok-free.app/generate";
+    const url = "https://ac36-34-31-140-244.ngrok-free.app/generate";
     const data = { context, abstract };
     const headers = {
       "Content-Type": "application/json",
@@ -28,8 +28,9 @@
         method: 'POST',
         headers: headers,
         body: JSON.stringify(data),
+
       });
-  
+      
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }

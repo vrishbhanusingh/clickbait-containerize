@@ -107,6 +107,24 @@ export const generatedTitles2 = createTable(
     updatedAt: timestamp("updatedAt", { withTimezone: true })}
 )
 
+export const generatedTitles3 = createTable(
+  'generatedTitles3',
+  {
+    id: serial("id").primaryKey(),
+    paperId: integer("paper_id").references(()=> papers.id).unique().notNull(),
+    generatedTitle : varchar("generated_title" ).notNull(),
+    generatedTitleGPT : varchar("generated_title_gpt" ),
+    generatedTitleLlama: varchar("generated_title_llama" ),
+    abstract: varchar('abstract'),
+    linksUsed : varchar("links_used" ),
+    pageNames : varchar("page_names" ),
+    // role:userSystemEnum('role').notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .default(sql`CURRENT_TIMESTAMP`)
+      .notNull(),
+    updatedAt: timestamp("updatedAt", { withTimezone: true })}
+)
+
 
 export type DrizzleChat = typeof chats.$inferSelect;
 export type DrizzlePaper = typeof papers.$inferSelect;

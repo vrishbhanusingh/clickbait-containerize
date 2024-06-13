@@ -12,8 +12,17 @@ import Link from "next/link";
 export default function NavBar({projectId, userId}) {
   const navItems = [
     {
+      path: `/dashboard/${userId}/`,
+      name: "Home",
+    },
+
+    {
+      path: `/dashboard/${userId}/${projectId}/clickbaitllama`,
+      name: "ClickBait",
+    },
+    {
       path: `/dashboard/${userId}/${projectId}/title-gen-page`,
-      name: "ClickaBait",
+      name: "ClickBait+",
     },
     {
       path: `/dashboard/${userId}/${projectId}/pdf-chat`,
@@ -23,10 +32,7 @@ export default function NavBar({projectId, userId}) {
       path: `/dashboard/${userId}/${projectId}/search-ads-rag`,
       name: "SciRag",
     },
-    {
-      path: `/dashboard/${userId}/${projectId}/writing`,
-      name: "About",
-    },
+
   ];
   let pathname = usePathname() || "/";
 

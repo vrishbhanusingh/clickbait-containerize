@@ -226,7 +226,8 @@ export async function POST(req: Request) {
       AI assitant if asked a question requiring real time information that needs access to the internet, it will use real time information from the WEB CONTEXT BLOCK.
       If the context does not provide the answer to question, the AI assistant will say, "I'm sorry, but I don't know the answer to that question".
       AI assistant will not apologize for previous responses, but instead will indicate new information was gained.
-      AI assistant will not invent anything that is not drawn directly from the context.`;
+      AI assistant will not invent anything that is not drawn directly from the context.
+      AI assistant will not make the response too long or too short. The maximimum words in the response is 150 words.`;
 
     await db.insert(_messages).values({
       paperId: paperId,
@@ -236,7 +237,7 @@ export async function POST(req: Request) {
 
     console.log(systemPrompt);
     const result = await streamText({
-      model: openai('gpt-3.5-turbo'),
+      model: openai('gpt-4o'),
       system: systemPrompt,
       messages: messages as CoreMessage[],
       async onFinish({ text, toolCalls, toolResults, usage, finishReason }) {
