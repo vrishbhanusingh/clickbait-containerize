@@ -1,6 +1,5 @@
 'use server';
-export const maxDuration = 60;
-export const dynamic = 'force-dynamic';
+
 export async function fetchFromNgrokAPI(context, abstract) {
     const url = "https://ac36-34-31-140-244.ngrok-free.app/generate";
     const data = { context, abstract };

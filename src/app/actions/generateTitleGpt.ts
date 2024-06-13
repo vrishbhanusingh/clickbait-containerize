@@ -9,8 +9,7 @@ import { eq } from 'drizzle-orm';
 import { validateQueryWeb } from './webRelevantOrNot';
 import { fetchFromNgrokAPI } from './fetchllama3Title';
 
-export const maxDuration = 60;
-export const dynamic = 'force-dynamic';
+
 // export const runtime = "edge"
 
 // const OPENAI_API_KEY = process.env.OPENAI_API_SECRET_KEY!;

@@ -8,8 +8,6 @@ import { NextResponse } from 'next/server';
 import { eq } from 'drizzle-orm';
 import { validateQueryWeb } from './webRelevantOrNot';
 import { fetchFromNgrokAPI } from './fetchllama3Title';
-export const maxDuration = 60;
-export const dynamic = 'force-dynamic';
 
 
 
