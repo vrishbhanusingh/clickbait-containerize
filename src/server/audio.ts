@@ -78,6 +78,7 @@ export const transcribeAudio = async (audioData: string) => {
   const filePath = "./public/tmp/input.wav";
   try {
     let transcription;
+
     fs.writeFileSync(filePath, audio);
 
     const readStream = fs.createReadStream(filePath);
@@ -88,6 +89,7 @@ export const transcribeAudio = async (audioData: string) => {
       file: readStream,
       model: "whisper-1",
     });
+    console.log("transcription :>> ", transcription);
     // } else if (config.whisperModelProvider === "groq") {
     //   transcription = await groq.audio.transcriptions.create({
     //     file: await toFile(audioBlob, `audio-${timestamp}.wav`),

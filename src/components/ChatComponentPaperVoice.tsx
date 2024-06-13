@@ -115,6 +115,7 @@ const ChatComponentPaperVoice = ({ paperId }: Props) => {
         const audioBlob = new Blob(chunksRef.current, { type: "audio/webm" });
 
         speechToText(audioBlob, async (data: string) => {
+          console.log("data :>> ", data);
           voicePromptRef.current = true;
           const transcription = await transcribeAudio(data);
           // const transcription = "Hello";
