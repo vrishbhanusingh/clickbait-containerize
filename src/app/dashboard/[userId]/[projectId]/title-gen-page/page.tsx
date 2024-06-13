@@ -14,9 +14,8 @@ const titleGen  = (props: Props) => {
 
 
     return (
-    <div>  
+    <div className='w-full flex justify-center items-center'>  
       <TitleabstractComponent paperId = {projectId} />
-
     </div>
   )
 }

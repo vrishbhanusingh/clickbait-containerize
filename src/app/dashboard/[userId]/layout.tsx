@@ -25,9 +25,9 @@ import SideNav from "~/components/ui/sideNav";
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
 
-    <div className="flex">
+    <div className="w-full">
       <SideNav  />
-      <div className="ml-64 p-4">
+      <div className="ml-52 p-4">
         {children}
       </div>
     </div>

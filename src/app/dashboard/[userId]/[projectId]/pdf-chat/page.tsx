@@ -45,14 +45,12 @@ const ChatPagePaper = async (props) => {
 
   return (
     <div>
-      <div className="h-full w-full mt-10 flex gap-20 bg-gray-50 ">
-        <div className="min-w-[20rem] max-h-[25rem]">
+      <div className="mx-auto mt-10 min-h-[35rem] flex justify-center items-center h-full ">
+        <div className="pr-10">
           <PDFViewer pdf_url={currentPaper?.pdfUrl ?? " "} />
         </div>
-        <div className="border-l-4  min-h-[40rem]  max-w-[30rem] border-l-slate-200">
-          <ChatComponentPaperVoice paperId={parseInt(projectId)} />
-        </div>
       </div>
+        <ChatComponentPaperVoice paperId={parseInt(projectId)} />
     </div>
 
     // </div>)
