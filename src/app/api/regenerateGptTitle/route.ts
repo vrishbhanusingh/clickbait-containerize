@@ -8,7 +8,7 @@ import { eq } from 'drizzle-orm';
 import { validateQueryWeb } from '~/app/actions/webRelevantOrNot';
 import { fetchWebContext } from '~/app/actions/getTitleUploadDB';
 import { fetchFromNgrokAPI } from '~/app/actions/fetchllama3Title';
-export const maxDuration = 60;
+export const maxDuration = 300;
 export const dynamic = 'force-dynamic';
 
 const openai = createOpenAI({

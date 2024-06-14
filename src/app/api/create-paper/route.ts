@@ -4,7 +4,8 @@ import { getS3Url } from '~/lib/s3';
 import { db } from '~/server/db';
 import { chats , papers} from '~/server/db/schema';
 import { auth } from "@clerk/nextjs/server";
-
+export const maxDuration = 300;
+export const dynamic = 'force-dynamic';
 export async function POST(req: Request) {
     const {userId} = await auth();
     if (!userId) {
