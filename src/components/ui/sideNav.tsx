@@ -13,7 +13,7 @@ import { cn } from '~/lib/utils';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { fetchPapersByUser } from '~/app/actions/fetchPapersByUser';
 
-export default function SideNav(Papers) {
+export default function SideNav() {
   const [selectedPaper, setSelectedPaper] = useState(null);
   const [papers, setPapers] = useState([]);
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);

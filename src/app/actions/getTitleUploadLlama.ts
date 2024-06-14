@@ -3,7 +3,7 @@ import { type CoreMessage, streamText,generateText } from 'ai';
 import { createOpenAI } from '@ai-sdk/openai';
 import { getContextPdf, getContextAds, getContextWeb } from '~/lib/context';
 import { db } from '~/server/db';
-import { papers, chats, messages as _messages, generatedTitles, generatedTitles2 } from '~/server/db/schema';
+import { papers, chats, messages as _messages, generatedTitles, generatedTitles3 } from '~/server/db/schema';
 import { NextResponse } from 'next/server';
 import { eq } from 'drizzle-orm';
 import { validateQueryWeb } from './webRelevantOrNot';

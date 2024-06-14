@@ -1,7 +1,7 @@
 'use server';
 
 import { db } from '~/server/db';
-import { papers, generatedTitles2 } from '~/server/db/schema';
+import { papers, generatedTitles3 } from '~/server/db/schema';
 import { eq } from 'drizzle-orm';
 
 export const fetchPapersByUser = async (userId) => {
@@ -15,14 +15,14 @@ export const fetchPapersByUser = async (userId) => {
     // Fetch generated titles and add them to the papers
     const resultsWithTitle = await Promise.all(result.map(async (paper) => {
       const generatedTitle = await db.select()
-        .from(generatedTitles2)
-        .where(eq(generatedTitles2.paperId, paper.id));
+        .from(generatedTitles3)
+        .where(eq(generatedTitles3.paperId, paper.id));
         
       // Extract and clean the generated title
-      const title = generatedTitle[0]?.generatedTitle.replace("::TITLESTART::", "").replace("::TITLEEND::", "").trim() || '';
-
+      const title = generatedTitle[0]?.generatedTitleGPT.replace("::TITLESTART::", "").replace("::TITLEEND::", "").trim() || '';
+      const titleLlama = generatedTitle[0]?.generatedTitleLlama;
       // Return the paper object with the added title field
-      return { ...paper, title };
+      return { ...paper, title , titleLlama };
     }));
 
     return resultsWithTitle;

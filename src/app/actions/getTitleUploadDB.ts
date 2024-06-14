@@ -16,7 +16,7 @@ const openai = createOpenAI({
   apiKey: process.env.OPENAI_API_SECRET_KEY,
 });
 // Allow streaming responses up to 30 seconds
-async function fetchWebContext(getWebContextPrompt, fileKey) {
+export async function fetchWebContext(getWebContextPrompt, fileKey) {
   const {context:contextWeb } = await getContextWeb(getWebContextPrompt, fileKey);
   const formattedContextWeb = contextWeb.map((item) => {
     return `web page name :${item.title}\nweb page content:${item.content}\n`;

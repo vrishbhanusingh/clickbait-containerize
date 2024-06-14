@@ -112,7 +112,6 @@ export const generatedTitles3 = createTable(
   {
     id: serial("id").primaryKey(),
     paperId: integer("paper_id").references(()=> papers.id).unique().notNull(),
-    generatedTitle : varchar("generated_title" ).notNull(),
     generatedTitleGPT : varchar("generated_title_gpt" ),
     generatedTitleLlama: varchar("generated_title_llama" ),
     abstract: varchar('abstract'),

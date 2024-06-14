@@ -3,7 +3,7 @@ import { type CoreMessage, streamText,generateText } from 'ai';
 import { createOpenAI } from '@ai-sdk/openai';
 import { getContextPdf, getContextAds, getContextWeb } from '~/lib/context';
 import { db } from '~/server/db';
-import { papers, chats, messages as _messages, generatedTitles, generatedTitles2 } from '~/server/db/schema';
+import { papers,generatedTitles3 } from '~/server/db/schema';
 import { NextResponse } from 'next/server';
 import { eq } from 'drizzle-orm';
 import { validateQueryWeb } from './webRelevantOrNot';
@@ -34,16 +34,14 @@ export const generateTitleUpdateLlama = async (paperId) =>{
 
     const textllama = await fetchFromNgrokAPI('', abstract);
 
-    console.log(textllama);
+    console.log(textllama.result);
 
     // console.log(text, links);
 
-    await db.update(generatedTitles2).set({
-      generatedTitle : text,
-      abstract: abstract,
-      linksUsed: links,
-      pageNames: webpagenames
-    }).where(eq(generatedTitles2.paperId, paperId));
+    await db.update(generatedTitles3).set({
+      generatedTitleLlama : textllama.result,
+
+    }).where(eq(generatedTitles3.paperId, paperId));
 
     console.log('Title updated in db')
     

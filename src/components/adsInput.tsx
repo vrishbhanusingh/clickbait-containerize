@@ -14,7 +14,7 @@ import { generateTitle } from '~/app/actions/getTitleUploadDB';
 import { generatTitleGPT } from '~/app/actions/generateTitleGpt';
 import { generateTitleLlama } from '~/app/actions/generateTitleLlama';
 
-const FileUploadPaper = ({ userId }) => {
+const AdsInput = ({ userId }) => {
   const router = useRouter();
   const [uploading, setUploading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -107,27 +107,7 @@ const FileUploadPaper = ({ userId }) => {
 
   return (
     <div className='p-4 bg-white rounded-xl w-96'>
-      <div {...getRootProps({
-        className: 'border-dashed border-2 rounded-xl cursor-pointer bg-gray-50 py-12 flex justify-center items-center flex-col'
-      })}>
-        <input {...getInputProps()} />
-        {uploading ? (
-          <>
-            <Loader2 className="h-10 w-10 text-blue-500 animate-spin" />
-            <p className="mt-2 text-sm text-slate-400">Uploading...</p>
-          </>
-        ) : acceptedFile ? (
-          <>
-            <CheckCircle className="h-10 w-10 text-green-500" />
-            <p className="mt-2 text-sm text-slate-400">PDF uploaded: {acceptedFile.name}</p>
-          </>
-        ) : (
-          <>
-            <Inbox className="w-16 h-16 text-teal-700" />
-            <p className="mt-4 text-base text-slate-400">Drop PDF Here</p>
-          </>
-        )}
-      </div>
+
 
       <div className="my-4">
         <label htmlFor="abstract" className="block text-sm font-medium text-gray-700">Abstract:</label>
@@ -158,6 +138,6 @@ const FileUploadPaper = ({ userId }) => {
   );
 };
 
-export default FileUploadPaper;
+export default AdsInput;
 
 

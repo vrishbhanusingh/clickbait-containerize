@@ -9,7 +9,8 @@ import { NextResponse } from 'next/server';
 import { eq } from 'drizzle-orm';
 import { validateQueryWeb } from '~/app/actions/webRelevantOrNot';
 import { validateNeedWebSearch } from '~/app/actions/NeedWebSearch';
-
+export const maxDuration = 60;
+export const dynamic = 'force-dynamic';
 export const runtime = "edge"
 
 async function fetchWebContext(content, fileKey) {
@@ -29,7 +30,6 @@ const openai = createOpenAI({
   apiKey: process.env.OPENAI_API_SECRET_KEY,
 });
 
-export const maxDuration = 60;
 
 export async function POST(req: Request) {
   try {
