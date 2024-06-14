@@ -23,50 +23,9 @@ const AdsInput = ({ userId }) => {
   const [fileKey, setFileKey] = useState("");
   const [fileName, setFileName] = useState("");
 
-  const { mutate } = useMutation({
-    mutationFn: async ({ file_key, file_name, abstract }) => {
-      try {
-        const response = await axios.post("/api/create-paper", {
-          file_key,
-          file_name,
-          abstract,
-        });
-        return response.data;
-      } catch (error) {
-        console.error("Error making API request", error);
-        throw error;
-      }
-    },
-  });
 
-  const { getRootProps, getInputProps } = useDropzone({
-    accept: { "application/pdf": [".pdf"] },
-    maxFiles: 1,
-    onDrop: async (acceptedFiles) => {
-      const file = acceptedFiles[0];
-      if (file.size > 10 * 1024 * 1024) {
-        alert('Please upload a smaller file');
-        return;
-      }
 
-      try {
-        setUploading(true);
-        const data = await uploadToS3(file);
-        setAcceptedFile(file);
-        setFileKey(data.file_key);
-        setFileName(data.file_name);
-        if (!data?.file_key || !data.file_name) {
-          toast.error("Something went wrong");
-          return;
-        }
-      } catch (error) {
-        console.error('Error during file upload', error);
-        toast.error("Error uploading file");
-      } finally {
-        setUploading(false);
-      }
-    }
-  });
+  
 
   const handleAbstractChange = (event) => {
     setAbstractText(event.target.value);
