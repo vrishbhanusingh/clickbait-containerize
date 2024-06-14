@@ -115,6 +115,7 @@ import {
 import { NavItems } from '~/config';
 import { Menu } from 'lucide-react';
 import { ClerkProvider, SignInButton, SignOutButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import Image from 'next/image';
 
 export default function Header() {
   const navItems = NavItems();
@@ -127,7 +128,10 @@ export default function Header() {
           className="flex items-center gap-2 text-lg font-semibold md:text-base"
           prefetch={false}
         >
-          <span className="w-8 h-8 border bg-accent rounded-full" />
+          <span className="w-8 h-8 border bg-black bg-accent rounded-full" />
+          {/* <Image
+          src="/"
+          /> */}
           <span>Acme Inc</span>
         </Link>
 

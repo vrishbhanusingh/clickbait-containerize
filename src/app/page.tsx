@@ -70,12 +70,16 @@ import { SignInButton } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
 import Link from "next/link";
 import { Button } from "~/components/ui/button";
+import { LogIn } from "lucide-react";
+import FileUpload from "~/components/fileUpload";
 import GoToDashButton from "~/components/ui/GoToDashButton";
 
-export default async function HomePage() {
-  const { userId } = await auth();
-  const isAuth = !!userId;
+// import {Uploader} from "~/components/fileUpload";
 
+export default async function HomePage() {
+  const {  userId  } = await auth();
+  const isAuth = !!userId;
+;
   return (
     <div
       className="min-h-screen flex items-center justify-center"

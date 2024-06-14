@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useMutation } from '@tanstack/react-query';
@@ -22,6 +21,8 @@ const FileUploadPaper = ({ userId }) => {
   const [acceptedFile, setAcceptedFile] = useState(null);
   const [fileKey, setFileKey] = useState("");
   const [fileName, setFileName] = useState("");
+
+  // Debugging to check the value of userId
 
   const { mutate } = useMutation({
     mutationFn: async ({ file_key, file_name, abstract }) => {
@@ -136,7 +137,7 @@ const FileUploadPaper = ({ userId }) => {
           value={abstractText}
           onChange={handleAbstractChange}
           rows={4}
-          className="shadow-sm mt-1 block w-full sm:text-sm border border-gray-300 rounded-md focus:ring-teal-500 focus:border-teal-500 p-2"
+          className="shadow-sm bg-white mt-1 block w-full sm:text-sm border border-gray-300 rounded-md focus:ring-teal-500 focus:border-teal-500 p-2"
           style={{ cursor: 'text' }}
         />
       </div>
@@ -159,5 +160,3 @@ const FileUploadPaper = ({ userId }) => {
 };
 
 export default FileUploadPaper;
-
-

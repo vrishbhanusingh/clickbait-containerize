@@ -68,7 +68,7 @@ const [expanded, setExpanded] = useState<{ [key: string]: boolean }>({});
           type='text'
           value={query}
           onChange={handleInputChange}
-          className='border border-gray-300 rounded-lg p-2 w-full mb-4'
+          className='border border-gray-300 rounded-lg bg-white p-2 w-full mb-4'
           placeholder='Enter your search query'
         />
         <Button onClick={handleFetchData} className='bg-teal-800 text-white px-4 py-2 rounded hover:bg-green-700 w-full'>

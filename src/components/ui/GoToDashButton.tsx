@@ -17,7 +17,7 @@ const GoToDashButton: React.FC<GoToDashButtonProps> = () => {
   };
 
   return (
-    <Button onClick={handleClick}>
+    <Button onClick={handleClick} >
 
       Go to Dashboard
     </Button>
