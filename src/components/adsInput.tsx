@@ -110,7 +110,7 @@ const AdsInput = ({ userId }) => {
 
 
       <div className="my-4">
-        <label htmlFor="abstract" className="block text-sm font-medium text-gray-700">Abstract:</label>
+        <label htmlFor="abstract" className="block text-sm font-medium text-gray-700">Describe your query in natural language:</label>
         <textarea
           id="abstract"
           value={abstractText}

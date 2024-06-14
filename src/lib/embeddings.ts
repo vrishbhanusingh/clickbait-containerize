@@ -32,3 +32,5 @@ export async function getEmbeddingsAds(text:string){
         throw error
     }
 }
+
+
