@@ -118,7 +118,7 @@ export async function POST(req: Request) {
             system: systemPrompt,
             prompt: prompt,
           });
-          const textllama = await fetchFromNgrokAPI('',prompt);
+          const textllama = await fetchFromNgrokAPI('',abstract);
           console.log(textllama);
           console.log(text, links);
       

@@ -81,9 +81,9 @@ export default function RootLayout({
         <html lang="en" className={`${GeistSans.variable}`}>
           <body className="flex flex-col min-h-screen">
             <Header />
-            <div className="flex flex-grow pt-20">
+            <div className="flex flex-grow ">
              
-              <main className="flex-grow p-10">
+              <main className="flex-grow">
                 {children}
               </main>
             </div>

@@ -9,9 +9,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   return (
 
-    <div className="flex flex-grow">
+    <div className="flex">
       <SideNav  />
-      <div className="flex-grow ml-64 p-4">
+      <div className="ml-64 p-4">
         {children}
       </div>
     </div>

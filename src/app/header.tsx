@@ -123,7 +123,7 @@ export default function Header() {
     <header className="fixed top-0 left-0 right-0 h-16 px-4 border-b shrink-0 md:px-6 justify-between bg-white z-50">
       <div className="flex items-center justify-between h-full">
         <Link
-          href="#"
+          href="/"
           className="flex items-center gap-2 text-lg font-semibold md:text-base"
           prefetch={false}
         >
