@@ -56,11 +56,6 @@ const TitleGen = (props: Props) => {
     fetchPapers();
   }, [userId]);
 
-  console.log(papers);
-
-    return (
-    <div className='w-full flex justify-center items-center'>  
-      <TitleabstractComponent paperId = {projectId} />
   return (
     <div className="container mx-auto p-4">
       <div className="mb-8">

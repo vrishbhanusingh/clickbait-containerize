@@ -80,7 +80,6 @@ export default function RootLayout({
         <html lang="en" className={`${GeistSans.variable}`}>
           <body className="">
             <Header />
-            <div className="h-[120px] w-full"></div>
                 {children}
             <Toaster />
           </body>

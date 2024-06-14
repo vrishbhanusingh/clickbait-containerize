@@ -42,7 +42,9 @@ const page = ({ params: { userId } }: Props) => {
   }, [userId]);
   console.log(papers);
   return (
-    <div>
+    <div
+    
+    >
       <div className="flex gap-6">
         <div className="mb-8 w-full max-w-md rounded-lg border border-gray-300 p-6 shadow-lg">
           <h2 className="mb-4 flex items-center space-x-2 text-lg font-semibold">

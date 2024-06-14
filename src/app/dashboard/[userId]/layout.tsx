@@ -30,8 +30,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   return (
 
-    <div className="w-full">
+    <div className="w-full" >
       <SideNav  />
+      <div className="h-[120px] w-full"></div>
+
       <div className="ml-52 p-4">
         {children}
       </div>
