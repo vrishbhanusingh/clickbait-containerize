@@ -58,6 +58,7 @@ const TitleGen = (props: Props) => {
 
   return (
     <div className="container mx-auto p-4">
+      <h1 className='text-center text-2xl font-bold mb-8'>Go full-send on your research paper with our gpt model that takes into account your whole paper, uses the power of the internet for gather more information and leverages the the ads database to gather more examples</h1>
       <div className="mb-8">
         <TitleabstractComponent paperId={projectId} />
       </div>

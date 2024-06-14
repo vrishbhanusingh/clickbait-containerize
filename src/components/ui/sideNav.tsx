@@ -16,7 +16,7 @@ import { fetchPapersByUser } from '~/app/actions/fetchPapersByUser';
 export default function SideNav() {
   const [selectedPaper, setSelectedPaper] = useState(null);
   const [papers, setPapers] = useState([]);
-  const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
+  const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
 
   // const [selectedPaper, setSelectedPaper] = useState<number | null>(null);
 

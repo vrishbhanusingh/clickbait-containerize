@@ -5,7 +5,7 @@ import { getMatchesFromEmbeddingsAds } from '~/lib/context';
 import { Pinecone } from "@pinecone-database/pinecone";
 
 export const fetchJinaEmbedding = async (adsQuery:string) => {
-  const url = "https://9401-34-147-124-190.ngrok-free.app/encode";
+  const url = "https://5101-34-81-101-253.ngrok-free.app/encode";
   const data = { "input_string": adsQuery };
   const headers = {
     "Content-Type": "application/json",

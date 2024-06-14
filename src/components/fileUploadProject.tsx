@@ -94,7 +94,7 @@ const FileUploadPaper = ({ userId }) => {
         // const { text, link } = generateTitle(paper_id);
 
 
-        router.push(`/dashboard/${userId}/${paper_id}`);
+        router.push(`/dashboard/${userId}/${paper_id}/`);
       },
       onError: (err) => {
         toast.error("Error creating paper");

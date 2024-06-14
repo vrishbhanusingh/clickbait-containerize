@@ -1,7 +1,7 @@
 'use server';
 
 export async function fetchFromNgrokAPI(context, abstract) {
-    const url = "https://9c63-34-136-112-53.ngrok-free.app/generate";
+    const url = "https://839e-35-184-18-40.ngrok-free.app/generate";
     const data = { context, abstract };
     const headers = {
       "Content-Type": "application/json",

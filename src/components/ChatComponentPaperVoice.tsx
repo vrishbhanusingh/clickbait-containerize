@@ -133,7 +133,7 @@ const ChatComponentPaperVoice = ({ paperId }: Props) => {
   };
 
   return (
-    <div className="fixed h-[550px] bottom-4 right-4 w-80 bg-white shadow-lg rounded-lg overflow-hidden flex flex-col">
+    <div className="fixed h-[700px] bottom-4 right-4 w-850 bg-white shadow-lg rounded-lg overflow-hidden flex flex-col">
       {/* Header */}
       <div className="bg-teal-800 text-white p-3">
         <h3 className="text-lg font-bold">Chat</h3>

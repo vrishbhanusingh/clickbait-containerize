@@ -9,7 +9,7 @@ type Props = {
 }
 const page = ({ params: { userId, projectId } }: Props) => {
   return (
-    <div>page
+    <div className='flex items-center justify-center min-h-screen'><h2>You paper is cooking.... Please wait a few seconds and choose your service.</h2>
       {/* {projectId} */}
     </div>
     

@@ -26,7 +26,7 @@ export default function NavBar({projectId, userId}) {
     },
     {
       path: `/dashboard/${userId}/${projectId}/pdf-chat`,
-      name: "Research",
+      name: "PaperTalk",
     },
     {
       path: `/dashboard/${userId}/${projectId}/search-ads-rag`,

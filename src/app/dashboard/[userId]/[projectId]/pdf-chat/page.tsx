@@ -45,7 +45,8 @@ const ChatPagePaper = async (props) => {
 
   return (
     <div>
-      <div className="mx-auto mt-10 min-h-[35rem] flex justify-center items-center h-full ">
+      <div className="mx-auto mt-10 min-h-[45rem] flex justify-center items-center h-full ">
+        
         <div className="pr-10">
           <PDFViewer pdf_url={currentPaper?.pdfUrl ?? " "} />
         </div>

@@ -108,6 +108,7 @@ const TitleGen = (props: Props) => {
 
   return (
     <div className="container mx-auto p-4">
+      <h1 className='text-center text-2xl font-bold mb-8'>Use our carefully alligned Llama3 model to generate titles for your paper for maximum reads</h1>
       <div className="mb-8">
         <TitleabstractComponentLlama paperId={projectId} />
       </div>

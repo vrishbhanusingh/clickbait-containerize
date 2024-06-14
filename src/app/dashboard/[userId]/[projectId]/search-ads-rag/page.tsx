@@ -59,9 +59,8 @@ const [expanded, setExpanded] = useState<{ [key: string]: boolean }>({});
     <div className='flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4'>
       <div className='border border-gray-300 shadow-lg rounded-lg p-6 w-full max-w-md mb-8 bg-white'>
         <h2 className='text-lg font-semibold mb-4 flex items-center space-x-2'>
-          <span>Search NASA/ADS</span>
+          <span>Search NASA/ADS in natural language</span>
         </h2>
-        <AdsInput userId={userId} />
       </div>
       <div className='w-full max-w-md mb-8'>
         <input

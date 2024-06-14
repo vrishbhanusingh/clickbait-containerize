@@ -121,18 +121,22 @@ export default function Header() {
   const navItems = NavItems();
   const [isNavOpen, setIsNavOpen] = useState(false);
   return (
-    <header className="fixed top-0 left-0 right-0 h-16 px-4 border-b shrink-0 md:px-6 justify-between bg-white z-50">
+    <header className="fixed top-0 left-0 right-0 h-16 px-4 border-b shrink-0 md:px-6 justify-between bg-white z-50 bg-gray-200">
       <div className="flex items-center justify-between h-full">
         <Link
           href="/"
           className="flex items-center gap-2 text-lg font-semibold md:text-base"
           prefetch={false}
         >
-          <span className="w-8 h-8 border bg-black bg-accent rounded-full" />
-          {/* <Image
-          src="/"
-          /> */}
-          <span>Acme Inc</span>
+          <span className="w-8 h-8 border bg-black bg-accent rounded-full" >
+          <span><Image
+          src="/images/IMG_20240614_133357-removebg-preview.png"
+          width={32}  // replace with your desired width
+          height={32} // replace with your desired height
+          layout="fixed"
+          /></span>
+          </span>
+          <span>PaperHub</span>
         </Link>
 
         <div className="ml-4 flex items-center gap-3">
