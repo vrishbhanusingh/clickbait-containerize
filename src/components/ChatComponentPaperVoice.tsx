@@ -133,7 +133,7 @@ const ChatComponentPaperVoice = ({ paperId }: Props) => {
   };
 
   return (
-    <div className="fixed h-[700px] bottom-4 right-4 w-850 bg-white shadow-lg rounded-lg overflow-hidden flex flex-col">
+    <div className="fixed h-[700px] bottom-4 right-4 w-[500px] bg-white shadow-lg rounded-lg overflow-hidden flex flex-col">
       {/* Header */}
       <div className="bg-teal-800 text-white p-3">
         <h3 className="text-lg font-bold">Chat</h3>
@@ -145,7 +145,7 @@ const ChatComponentPaperVoice = ({ paperId }: Props) => {
       </div>
 
       {/* Recording & Sending Controls */}
-      <div className="p-2 flex justify-center items-center">
+      <div className="p-2 flex justify-center items-center overflow-auto ">
         {isLoading || audioLoading ? (
           <div className="h-fit rounded-full border border-gray-300 bg-gray-100 p-4 shadow-lg">
             <Loader2 size={24} className="animate-spin" />

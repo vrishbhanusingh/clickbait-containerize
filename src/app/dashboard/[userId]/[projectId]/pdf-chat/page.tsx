@@ -51,7 +51,9 @@ const ChatPagePaper = async (props) => {
           <PDFViewer pdf_url={currentPaper?.pdfUrl ?? " "} />
         </div>
       </div>
+      <div className="w-1/4 overflow-auto">
         <ChatComponentPaperVoice paperId={parseInt(projectId)} />
+    </div>
     </div>
 
     // </div>)
