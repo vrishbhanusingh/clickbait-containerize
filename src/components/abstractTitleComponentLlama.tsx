@@ -133,7 +133,7 @@ export const TitleabstractComponentLlama = ({ paperId }: Props) => {
                 )}
             </div> */}
             <div className='flex justify-center items-center'>
-            <Button onClick={() => updateMutation.mutate()} className="bg-teal-800 text-white px-4 py-2 rounded hover:bg-green-700 flex items-center justify-center">
+            <Button onClick={() => updateMutation.mutate()} className="bg-customTeal text-white px-4 py-2 rounded hover:bg-green-700 flex items-center justify-center">
                 {updateMutation.isPending && <Spinner />}
                 {!updateMutation.isPending && 'Regenerate'}
             </Button>

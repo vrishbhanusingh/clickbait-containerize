@@ -159,6 +159,7 @@ export async function processAndVectorizeContent(
             { title: content.title, link: content.link },
             embeddings,
           );
+          console.log(vectorStore)
           const contentResults = await vectorStore.similaritySearch(
             query,
             numberOfSimilarityResults,

@@ -117,7 +117,7 @@ const MessageList = ({ messages, isLoading }: Props) => {
   if (!messages) return <></>;
 
   return (
-    <div className="flex w-full flex-col gap-2 px-4">
+    <div className="flex w-full flex-col gap-2 px-4 ">
       {messages.map((message) => (
         <div
           key={message.id}
@@ -130,7 +130,7 @@ const MessageList = ({ messages, isLoading }: Props) => {
             className={cn(
               "rounded-lg px-3 py-1 text-sm shadow-md ring-1 ring-gray-900/10",
               {
-                "bg-teal-800 text-white": message.role === "user",
+                "bg-teal-900 text-white": message.role === "user",
               },
             )}
           >

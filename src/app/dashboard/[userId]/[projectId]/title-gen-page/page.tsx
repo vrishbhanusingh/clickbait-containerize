@@ -58,7 +58,7 @@ const TitleGen = (props: Props) => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className='text-center text-2xl font-bold mb-8'>Go full-send on your research paper with our gpt model that takes into account your whole paper, uses the power of the internet for gather more information and leverages the the ads database to gather more examples</h1>
+      <h1 className='text-center text-xl font-bold mb-8'>Generate titles with wider context using access to the internet, NASA/ADS and your paper content</h1>
       <div className="mb-8">
         <TitleabstractComponent paperId={projectId} />
       </div>
@@ -70,13 +70,13 @@ const TitleGen = (props: Props) => {
               <div className="flex justify-between items-center mb-2">
                 <div className="font-medium text-lg truncate w-3/4">{paper.title}</div>
                 <div className="flex space-x-3">
-                  <Button className="bg-teal-800 hover:bg-teal-700 p-1">
+                  <Button className="bg-customTeal hover:bg-teal-800 p-1">
                     <Link href={`/dashboard/${userId}/${paper.id}`} className="text-white no-underline">
                       Open
                     </Link>
                   </Button>
                   <Button
-                    className="bg-teal-800 hover:bg-teal-700 p-1"
+                    className="bg-customTeal hover:bg-teal-800 p-1"
                     onClick={() => setSelectedPaper(paper.id === selectedPaper ? null : paper.id)}
                   >
                     {selectedPaper === paper.id ? <ChevronUp /> : <ChevronDown />}
@@ -93,7 +93,7 @@ const TitleGen = (props: Props) => {
           {papers.length > 3 && (
             <div className="flex justify-center">
               <Button
-                className="bg-teal-800 hover:bg-teal-700 p-1 mt-4"
+                className="bg-customTeal hover:bg-teal-800 p-1 mt-4"
                 onClick={() => setShowAll(!showAll)}
               >
                 {showAll ? <ChevronUp className="h-5 w-5 text-white" /> : <ChevronDown className="h-5 w-5 text-white" />}

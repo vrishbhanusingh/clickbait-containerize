@@ -11,10 +11,6 @@ import Link from "next/link";
 
 export default function NavBar({projectId, userId}) {
   const navItems = [
-    {
-      path: `/dashboard/${userId}/`,
-      name: "Home",
-    },
 
     {
       path: `/dashboard/${userId}/${projectId}/clickbaitllama`,
@@ -32,6 +28,10 @@ export default function NavBar({projectId, userId}) {
       path: `/dashboard/${userId}/${projectId}/search-ads-rag`,
       name: "SciRag",
     },
+    {
+      path: `/dashboard/${userId}/`,
+      name: "Back",
+    },
 
   ];
   let pathname = usePathname() || "/";
@@ -46,7 +46,7 @@ export default function NavBar({projectId, userId}) {
 
   return (
     <div className="fixed top-20 z-50 right-1/2 translate-x-1/2 ">
-    <div className="border border-black-900/90 p-[0.4rem] rounded-lg mb-12 sticky top-4 z-[100] bg-teal-900/90 backdrop-blur-md shadow-2xl">
+    <div className="border border-black-900/90 p-[0.4rem] rounded-lg mb-12 sticky top-4 z-[100] bg-customTeal backdrop-blur-md shadow-2xl">
       
       <nav className="flex gap-2 relative justify-start w-full z-[100]  rounded-lg">
         {navItems.map((item, index) => {
@@ -58,7 +58,7 @@ export default function NavBar({projectId, userId}) {
             <Link
               key={item.path}
               className={`px-4 py-2 rounded-md text-sm lg:text-base relative no-underline duration-300 ease-in ${
-                isActive ? "text-gray-100" : "text-zinc-200"
+                isActive ? "text-white" : "text-white"
               }`}
               data-active={isActive}
               href={item.path}
@@ -68,7 +68,7 @@ export default function NavBar({projectId, userId}) {
               <span>{item.name}</span>
               {item.path === hoveredPath && (
                 <motion.div
-                  className="absolute bottom-0 left-0 h-full bg-stone-800/80 rounded-md -z-10"
+                  className="absolute bottom-0 left-0 h-full bg-stone-500/80 rounded-md -z-10"
                   layoutId="navbar"
                   aria-hidden="true"
                   style={{

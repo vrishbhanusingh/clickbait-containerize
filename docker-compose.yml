@@ -20,12 +20,14 @@ services:
         NEXT_PUBLIC_S3_REGION: ${NEXT_PUBLIC_S3_REGION}
         PINECONE_API_KEY: ${PINECONE_API_KEY}
         OPENAI_API_SECRET_KEY: ${OPENAI_API_SECRET_KEY}
+        LLAMA_API_URL: ${LLAMA_API_URL}
+        EMBEDDING_API_URL: ${EMBEDDING_API_URL}
 
     working_dir: /app
 
     ports:
       - "3000:3000"
-    image: t3-app
+    image: paperhub-nextjs
     env_file:
       - .env
     networks:

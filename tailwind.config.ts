@@ -18,7 +18,14 @@ const config = {
       },
     },
     extend: {
+      backgroundImage: {
+        'hero-pattern': "url('/images/—Pngtree—dark green cyan paper cut_1225583.jpg')",
+        'footer-texture': "url('/img/footer-texture.png')",
+        'header-texture': "url('/images/headerbg3.jpg')",
+      },
       colors: {
+        customTeal: '#012D30',
+        customTealLight: '012D30',
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -73,12 +80,18 @@ const config = {
           '50%': { transform: 'translate(-30px, 40px) scale(0.7)', borderRadius: '90% 40% 50% 90% / 90% 60% 30% 20%' },
           '75%': { transform: 'translate(20px, -20px) scale(1.2)', borderRadius: '45% 55% 50% 50% / 55% 50% 60% 40%' },
         },
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        fadeIn: 'fadeIn 2s ease-in forwards',
         blob: "blob 20s infinite ease-in-out",
       },
+      
     },
   },
   plugins: [require("tailwindcss-animate"),

@@ -1,7 +1,10 @@
 'use server';
 
 export async function fetchFromNgrokAPI(context, abstract) {
-    const url = "https://839e-35-184-18-40.ngrok-free.app/generate";
+    // const url = "https://839e-35-184-18-40.ngrok-free.app/generate";
+    // const url = "https://74cf-103-15-228-94.ngrok-free.app/generate";
+    const url = process.env.LLAMA_API_URL;
+    
     const data = { context, abstract };
     const headers = {
       "Content-Type": "application/json",

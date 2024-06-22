@@ -46,7 +46,7 @@ const page = ({ params: { userId } }: Props) => {
     
     >
       <div className="flex gap-6">
-        <div className="mb-8 w-full max-w-md rounded-lg border border-gray-300 p-6 shadow-lg">
+        <div className="bg-white mb-8 w-full max-w-md rounded-lg border border-gray-300 p-6 shadow-lg">
           <h2 className="mb-4 flex items-center space-x-2 text-lg font-semibold">
             <Upload />
             <span>Upload a new paper</span>
@@ -62,12 +62,12 @@ const page = ({ params: { userId } }: Props) => {
               papers.map((paper) => (
                 <div
                   key={paper.id}
-                  className="mb-4 rounded-lg border border-gray-300 p-4 shadow-lg  "
+                  className="mb-4 bg-white rounded-lg border border-gray-300 p-4 shadow-lg  "
                 >
                   <div className="mb-2 flex items-center justify-between overflow-y-auto">
                     <div className="font-medium">{paper.title}</div>
                     <div className="flex space-x-3 ">
-                      <Button className="bg-teal-800">
+                      <Button className="bg-teal-900">
                         <Link
                           href={`/dashboard/${userId}/${paper.id}/pdf-chat`}
                           className="text-white no-underline"
@@ -76,7 +76,7 @@ const page = ({ params: { userId } }: Props) => {
                         </Link>
                       </Button>
                       <Button
-                        className="bg-teal-800"
+                        className="bg-teal-900"
                         onClick={() =>
                           setSelectedPaper(
                             paper.id === selectedPaper ? null : paper.id,

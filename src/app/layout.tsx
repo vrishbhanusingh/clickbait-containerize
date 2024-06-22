@@ -65,8 +65,8 @@ import { Toaster } from "react-hot-toast";
 import Header from './header';
 
 export const metadata = {
-  title: "Clickbait",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  title: "PaperHub",
+  icons: [{ rel: "icon", url: "/images/IMG_20240614_133357-removebg-preview.png" }],
 };
 
 export default function RootLayout({
@@ -78,8 +78,8 @@ export default function RootLayout({
     <ClerkProvider>
       <Providers>
         <html lang="en" className={`${GeistSans.variable}`}>
-          <body className="">
-            <Header />
+          <body className="bg-gray-100">
+            {/* <Header /> */}
                 {children}
             <Toaster />
           </body>
