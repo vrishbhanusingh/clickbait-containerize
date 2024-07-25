@@ -17,7 +17,7 @@ export const fetchJinaEmbedding = async (adsQuery:string) => {
 
   const response = await axios.post(url, data, { headers });
   
-  console.log(response.data.result)
+  // console.log(response.data.result)
       const client = new Pinecone({
         apiKey: process.env.PINECONE_API_KEY!,
       });

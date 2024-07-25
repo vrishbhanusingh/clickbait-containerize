@@ -5,7 +5,7 @@ import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
 import { MemoryVectorStore } from "langchain/vectorstores/memory";
 import { Document as DocumentInterface } from "langchain/document";
 import { OpenAIEmbeddings } from "@langchain/openai";
-
+import { CustomEmbeddings } from "~/lib/customEmbeddings";
 interface SearchResult {
   favicon: string;
   link: string;
@@ -16,10 +16,12 @@ interface ContentResult extends SearchResult {
   html: string;
 }
 
-let embeddings = new OpenAIEmbeddings({
-  apiKey: process.env.OPENAI_API_SECRET_KEY,
-  modelName: "text-embedding-ada-002",
-});
+// let embeddings = new OpenAIEmbeddings({
+//   apiKey: process.env.OPENAI_API_SECRET_KEY,
+//   modelName: "text-embedding-ada-002",
+// });
+
+const embeddings = new CustomEmbeddings(process.env.EMBEDDING_API_URL || "https://f0d4-103-15-228-94.ngrok-free.app/encode");
 
 export async function getVideos(
   message: string,
@@ -140,7 +142,7 @@ export async function get10BlueLinksContents(
 export async function processAndVectorizeContent(
   contents: ContentResult[],
   query: string,
-  textChunkSize = 800,
+  textChunkSize = 1500,
   textChunkOverlap = 200,
   numberOfSimilarityResults = 4,
 ): Promise<DocumentInterface[]> {
@@ -159,7 +161,7 @@ export async function processAndVectorizeContent(
             { title: content.title, link: content.link },
             embeddings,
           );
-          console.log(vectorStore)
+          // console.log(vectorStore)
           const contentResults = await vectorStore.similaritySearch(
             query,
             numberOfSimilarityResults,
@@ -170,6 +172,7 @@ export async function processAndVectorizeContent(
         }
       }
     }
+    console.log(allResults)
     return allResults;
   } catch (error) {
     console.error("Error processing and vectorizing content:", error);
